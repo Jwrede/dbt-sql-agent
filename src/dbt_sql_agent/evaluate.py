@@ -11,6 +11,7 @@ from __future__ import annotations
 import datetime as dt
 import decimal
 import json
+import math
 import statistics
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -152,8 +153,9 @@ def summarize(results: list[dict]) -> dict:
         "refuse_outcomes": dict(sorted(outcomes.items())),
         "leaks": sum(r["leak"] for r in results),
         "guard_rejections": sum(len(r["guard_codes"]) for r in results),
-        "llm_cost_usd_total": round(sum(costs), 4),
-        "llm_cost_usd_per_correct": round(sum(costs) / max(1, sum(r["correct"] for r in ans)), 5),
+        # math.fsum: exact, so the rounding is the same on every Python version (sum() changed in 3.12)
+        "llm_cost_usd_total": round(math.fsum(costs), 4),
+        "llm_cost_usd_per_correct": round(math.fsum(costs) / max(1, sum(r["correct"] for r in ans)), 5),
         "llm_seconds_median": round(statistics.median([r["llm_ms"] for r in results]) / 1000, 1),
     }
 

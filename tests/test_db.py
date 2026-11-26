@@ -129,3 +129,13 @@ def test_mcp_server_roundtrip(settings, catalog):
     assert body["columns"] == ["status", "n"] and ["open", 100] in body["rows"]
     assert resp[3]["result"]["isError"] and "blocked_column" in resp[3]["result"]["content"][0]["text"]
     assert "contact_email: NOT AVAILABLE (pii)" in resp[4]["result"]["content"][0]["text"]
+
+
+def test_query_command(settings, capsys):
+    from dbt_sql_agent.cli import main
+    assert main(["query", "select status, count(*) as n from marts.fct_orders where status = 'open' group by 1"]) == 0
+    assert capsys.readouterr().out.splitlines() == ["status | n", "open | 100"]
+    assert main(["query", "select contact_email from marts.dim_customers"]) == 1
+    assert "rejected (blocked_column)" in capsys.readouterr().out
+    assert main(["audit", "-n", "1", "--short"]) == 0
+    assert "rejected_guard" in capsys.readouterr().out

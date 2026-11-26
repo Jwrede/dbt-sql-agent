@@ -40,8 +40,12 @@ def main(argv: list[str] | None = None) -> int:
     m.add_argument("--parallel", type=int, default=4)
     m.add_argument("--prune", action="store_true", help="delete recordings the question set no longer uses")
     sub.add_parser("mcp", help="serve the warehouse as MCP tools on stdio")
+    qy = sub.add_parser("query", help="run one SQL query through the guard, the agent role and the audit log (no LLM)")
+    qy.add_argument("sql")
+    qy.add_argument("--max-rows", type=int, default=20)
     t = sub.add_parser("audit", help="show the newest audit log entries")
     t.add_argument("-n", type=int, default=10)
+    t.add_argument("--short", action="store_true", help="one compact line per entry")
     args = ap.parse_args(argv)
     s = Settings.from_env()
 
@@ -57,7 +61,25 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.cmd == "audit":
         for row in reversed(db.Audit(s.admin_dsn).tail(args.n)):
-            print(json.dumps(row, ensure_ascii=False))
+            if args.short:
+                what = row["question"] or row["sql_proposed"] or ""
+                print(f"{row['id']:>5}  {row['at'][:19].replace('T', ' ')}  {row['principal']:<8} {row['decision']:<16} "
+                      f"{' '.join(what.split())[:56]}")
+            else:
+                print(json.dumps(row, ensure_ascii=False))
+        return 0
+    if args.cmd == "query":
+        from .mcp_server import Server
+        out = Server(load_catalog(s), s.agent_dsn, db.Audit(s.admin_dsn), principal="cli").call(
+            "run_query", {"sql": args.sql, "max_rows": args.max_rows})
+        text = out["content"][0]["text"]
+        if out["isError"]:
+            print(text)
+            return 1
+        body = json.loads(text)
+        print(" | ".join(body["columns"]))
+        for r in body["rows"]:
+            print(" | ".join(str(v) for v in r))
         return 0
     if args.cmd == "mcp":
         from .mcp_server import Server, serve

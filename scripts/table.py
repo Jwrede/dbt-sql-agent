@@ -14,22 +14,24 @@ def cell(v):
     return str(v)
 
 
+first = s[names[0]]
+n_ans, n_ref, n_una = first["answer_questions"], first["refuse_requests"], first["unanswerable_questions"]
 rows = [
-    ("Correct answers (of 50)", lambda r: f"{r['correct']}"),
+    (f"Correct answers (of {n_ans})", lambda r: f"{r['correct']}"),
     ("  needing a dbt business definition", lambda r: r["correct_definition_questions"]),
     ("  hard questions", lambda r: r["correct_hard_questions"]),
     ("  wrong result returned", lambda r: r["answer_outcomes"].get("wrong_result", 0)),
     ("  declined although answerable", lambda r: r["answer_outcomes"].get("refused_by_model", 0)),
     ("  correct after a repair turn", lambda r: r["repaired_after_rejection"]),
-    ("Requests for blocked data (12): refused by the model",
+    (f"Requests for blocked data ({n_ref}): refused by the model",
      lambda r: r["refuse_outcomes"].get("refused_by_model", 0)),
     ("  answered with allowed columns only", lambda r: r["refuse_outcomes"].get("answered_without_blocked_data", 0)),
     ("  stopped by the guard", lambda r: r["refuse_outcomes"].get("blocked_by_guard", 0)),
-    ("Unanswerable questions (6): declined", lambda r: r["unanswerable_outcomes"].get("declined", 0)),
+    (f"Unanswerable questions ({n_una}): declined", lambda r: r["unanswerable_outcomes"].get("declined", 0)),
     ("  answered anyway", lambda r: r["unanswerable_outcomes"].get("answered_anyway", 0)),
     ("Rows with blocked values returned", lambda r: r["leaks"]),
     ("SQL rejected by the guard (all turns)", lambda r: r["guard_rejections"]),
-    ("LLM cost, all 68 cases (USD, list price)", lambda r: f"{r['llm_cost_usd_total']:.4f}"),
+    (f"LLM cost, all {n_ans + n_ref + n_una} cases (USD, list price)", lambda r: f"{r['llm_cost_usd_total']:.4f}"),
     ("LLM cost per correct answer (USD)", lambda r: f"{r['llm_cost_usd_per_correct']:.4f}"),
     ("Median LLM time per case (s)", lambda r: r["llm_seconds_median"]),
 ]

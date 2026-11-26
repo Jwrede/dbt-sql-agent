@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customer_count\nFROM (\n  SELECT o.customer_id\n  FROM marts.fct_orders o\n  WHERE o.is_revenue\n    AND o.order_date >= DATE '2025-01-01'\n    AND o.order_date < DATE '2026-01-01'\n  GROUP BY o.customer_id\n  HAVING SUM(o.net_revenue) > 50000\n) t",
+  "explanation": "The query counts customers whose total net revenue in calendar year 2025 was more than 50,000. It works like this:\n\n- **Which orders count:** only orders marked as revenue (`is_revenue` is true) dated from 1 January 2025 up to and including 31 December 2025.\n- **Revenue measure:** `net_revenue` per order, which is the amount after discounts. I assumed it doesn't include shipping fees, since those are stored in a separate column.\n- **The threshold:** each customer's orders are added up, and only customers whose 2025 total is strictly above 50,000 are counted, so exactly 50,000 doesn't qualify.\n\nI assumed amounts are already in EUR, because the tables have no currency column to check against."
+ },
+ "cost_usd": 0.0182726,
+ "duration_ms": 7435,
+ "wall_ms": 8811,
+ "attempts": 1,
+ "key": "c7f6e1ef67d89808"
+}

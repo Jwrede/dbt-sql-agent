@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH c2024 AS (\n  SELECT DISTINCT customer_id\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2024-01-01'\n    AND order_date < DATE '2025-01-01'\n),\nc2025 AS (\n  SELECT DISTINCT customer_id\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2025-01-01'\n    AND order_date < DATE '2026-01-01'\n)\nSELECT\n  COUNT(c2024.customer_id) AS customers_completed_2024,\n  COUNT(c2025.customer_id) AS customers_also_completed_2025,\n  ROUND(100.0 * COUNT(c2025.customer_id) / NULLIF(COUNT(c2024.customer_id), 0), 2) AS pct_also_completed_2025\nFROM c2024\nLEFT JOIN c2025 ON c2025.customer_id = c2024.customer_id;",
+  "explanation": "Counts distinct customers with at least one completed (is_revenue = true) order in 2024, then checks which of them also have a completed order in 2025. The percentage is those customers divided by the 2024 customers, rounded to 2 decimals. Uses fct_orders only, so no personal data is touched."
+ },
+ "cost_usd": 0.00100533,
+ "duration_ms": 4495,
+ "wall_ms": 6439,
+ "attempts": 1,
+ "key": "2cc4ed922b591361"
+}

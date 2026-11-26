@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT country, COUNT(*) AS customers FROM marts.dim_customers GROUP BY country ORDER BY customers DESC, country;",
+  "explanation": "Counts customer accounts in marts.dim_customers for each country code, most customers first. This includes every account, including ones that have never completed an order."
+ },
+ "cost_usd": 0.030052,
+ "duration_ms": 3276,
+ "wall_ms": 5119,
+ "attempts": 1,
+ "key": "2532b5dd6cb916b0"
+}

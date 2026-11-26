@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * (SUM(net_revenue) FILTER (WHERE order_date >= DATE '2025-01-01') - SUM(net_revenue) FILTER (WHERE order_date < DATE '2025-01-01')) / NULLIF(SUM(net_revenue) FILTER (WHERE order_date < DATE '2025-01-01'), 0), 2) AS revenue_growth_pct\nFROM marts.fct_orders\nWHERE is_revenue\n  AND order_date >= DATE '2024-01-01'\n  AND order_date < DATE '2026-01-01'",
+  "explanation": "Revenue is taken as net_revenue on orders flagged is_revenue, assigned to a year by order_date. The result is the percentage change from calendar year 2024 to calendar year 2025: (2025 − 2024) / 2024 × 100. A negative value means revenue fell, and NULL means there was no 2024 revenue to compare against."
+ },
+ "cost_usd": 0.0093542,
+ "duration_ms": 3660,
+ "wall_ms": 5313,
+ "attempts": 1,
+ "key": "cb3f771e6a4fcb28"
+}

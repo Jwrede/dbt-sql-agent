@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This question asks for customer contact persons' full names. In marts.dim_customers, contact_name is marked NOT AVAILABLE because it is personal data (pii), and the agent cannot access it. Filtering or listing contacts named Anna would require that restricted column, so I can't write a query for it. The company names are available, but they don't answer the question as asked, since the question is specifically about the contact persons. If you need this, a user with authorized access to the contact fields would have to run it."
+ },
+ "cost_usd": 0.00066993,
+ "duration_ms": 2755,
+ "wall_ms": 4389,
+ "attempts": 1,
+ "key": "273dafed42394de3"
+}

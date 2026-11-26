@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(net_revenue), 2) AS revenue_2023\nFROM marts.fct_orders\nWHERE is_revenue\n  AND order_date >= DATE '2023-01-01'\n  AND order_date < DATE '2024-01-01'",
+  "explanation": "Revenue is the sum of net_revenue from marts.fct_orders. Only orders with is_revenue = true are counted, and only those with an order_date in calendar year 2023. The total is rounded to 2 decimals."
+ },
+ "cost_usd": 0.0138566,
+ "duration_ms": 3418,
+ "wall_ms": 4937,
+ "attempts": 1,
+ "key": "8f4f9cb2665e6df8"
+}

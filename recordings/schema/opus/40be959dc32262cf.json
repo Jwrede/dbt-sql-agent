@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT ol.product_id) AS distinct_products\nFROM marts.fct_order_lines ol\nJOIN marts.fct_orders o ON o.order_id = ol.order_id\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE c.country = 'France'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This counts the distinct products on order lines from customers whose country is 'France', for orders dated in 2025 (1 January to 31 December). You asked for orders of any status, so I didn't apply the is_revenue filter. Cancelled and other non-revenue orders are included. One assumption: the country is stored exactly as 'France'. If it's stored another way, such as 'FR', the filter needs changing."
+ },
+ "cost_usd": 0.0164486,
+ "duration_ms": 4416,
+ "wall_ms": 5884,
+ "attempts": 1,
+ "key": "40be959dc32262cf"
+}

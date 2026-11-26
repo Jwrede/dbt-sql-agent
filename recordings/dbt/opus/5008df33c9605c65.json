@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse only has actual orders from 2024-01-01 to 2025-12-31. It has no forecast, budget or plan data, so no query can return a Q1 2026 revenue forecast. Giving a number would mean inventing a forecasting method that isn't in the data or the business definitions. Instead I can return the actual net revenue for Q1 2024 and Q1 2025 (completed orders only, is_revenue = true), with order counts and year-over-year growth, as a starting point for a forecast. Part of the 2025 growth comes from the 4% list price increase on 2025-01-01."
+ },
+ "cost_usd": 0.0345206,
+ "duration_ms": 8011,
+ "wall_ms": 9260,
+ "attempts": 1,
+ "key": "5008df33c9605c65"
+}

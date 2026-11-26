@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.item_count), 2) AS avg_items_per_order\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "This query averages the item_count column over orders with status 'completed' placed in 2025, from 1 January 2025 up to but not including 1 January 2026. The result is rounded to 2 decimals.\n\nTwo things I assumed:\n- **Status value:** I assumed completed orders are stored as the lowercase text 'completed'. I didn't check the actual values, so if they're stored differently (for example 'Completed'), the query will return nothing.\n- **Completed vs. revenue orders:** I filtered on the status column, not the is_revenue flag. If the revenue rule also counts other statuses, such as shipped orders, the two will give different answers.\n\nI also used item_count exactly as it's stored on the order. If you need total units instead, add up quantity in fct_order_lines."
+ },
+ "cost_usd": 0.019636599999999997,
+ "duration_ms": 8107,
+ "wall_ms": 9495,
+ "attempts": 1,
+ "key": "85182328744e0feb"
+}

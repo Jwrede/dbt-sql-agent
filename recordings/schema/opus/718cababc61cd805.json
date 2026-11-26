@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.method, ROUND(AVG(p.paid_at - o.order_date), 2) AS avg_days_to_pay, COUNT(*) AS payments FROM marts.fct_payments p JOIN marts.fct_orders o ON o.order_id = p.order_id GROUP BY p.method ORDER BY avg_days_to_pay;",
+  "explanation": "This query gives the average number of days between the order date and the payment date for each payment method, rounded to 2 decimals. It links each payment to its order and also counts the payments per method.\n\nEvery payment counts, whatever the order's status, so I didn't filter on the revenue flag (is_revenue). If an order was paid in more than one payment, each payment counts separately. Results are sorted from the fastest-paying method to the slowest."
+ },
+ "cost_usd": 0.016944599999999997,
+ "duration_ms": 7070,
+ "wall_ms": 8407,
+ "attempts": 1,
+ "key": "718cababc61cd805"
+}

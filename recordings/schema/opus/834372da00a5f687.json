@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.method, COUNT(*) AS payment_count, ROUND(SUM(p.amount), 2) AS total_amount FROM marts.fct_payments p WHERE p.paid_at >= DATE '2025-01-01' AND p.paid_at < DATE '2026-01-01' GROUP BY p.method ORDER BY total_amount DESC",
+  "explanation": "Payments are filtered to those with paid_at in calendar year 2025, then grouped by payment method. For each method the query counts the payments and adds up their amounts, rounded to 2 decimals. The results are sorted by total amount, largest first."
+ },
+ "cost_usd": 0.014716600000000002,
+ "duration_ms": 5173,
+ "wall_ms": 6505,
+ "attempts": 1,
+ "key": "834372da00a5f687"
+}

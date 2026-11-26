@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(COALESCE(SUM(o.shipping_fee), 0), 2) AS shipping_fees FROM marts.fct_orders AS o WHERE o.status = 'completed' AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Sums shipping fees on orders with status 'completed' and an order date in 2025. I assumed the status value is spelled 'completed', since the schema provided doesn't list the status values. I filtered on status rather than is_revenue because you asked specifically about completed orders. \"In 2025\" refers to the order date, not the payment date."
+ },
+ "cost_usd": 0.008238200000000001,
+ "duration_ms": 3132,
+ "wall_ms": 4971,
+ "attempts": 1,
+ "key": "6bf60c4134271b09"
+}

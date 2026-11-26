@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.company_name, ROUND(SUM(o.net_revenue), 2) AS revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'\nGROUP BY c.customer_id, c.company_name\nORDER BY revenue DESC\nLIMIT 5;",
+  "explanation": "Revenue is the net revenue of completed orders only (is_revenue = true), so cancelled, returned and open orders are left out, and shipping fees aren't counted. The query adds up each customer's revenue for orders placed in calendar 2025 (the fiscal year is the calendar year). It then returns the five customers with the highest totals, showing company name and revenue rounded to 2 decimals. Results are grouped by customer ID, so two companies with the same name are kept separate."
+ },
+ "cost_usd": 0.0288686,
+ "duration_ms": 4857,
+ "wall_ms": 6646,
+ "attempts": 1,
+ "key": "dab5edf85e0f6db8"
+}

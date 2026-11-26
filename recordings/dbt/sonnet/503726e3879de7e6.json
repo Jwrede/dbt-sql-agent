@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH per_customer AS (\n    SELECT o.customer_id,\n           BOOL_OR(o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01') AS in_2024,\n           BOOL_OR(o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01') AS in_2025\n    FROM marts.fct_orders AS o\n    WHERE o.is_revenue\n    GROUP BY o.customer_id\n)\nSELECT ROUND(100.0 * COUNT(*) FILTER (WHERE in_2025) / NULLIF(COUNT(*), 0), 2) AS retention_pct\nFROM per_customer\nWHERE in_2024",
+  "explanation": "The base is every customer with at least one completed order (is_revenue) dated in 2024. The result is the percentage of those customers who also have at least one completed order dated in 2025, rounded to 2 decimals."
+ },
+ "cost_usd": 0.014416199999999999,
+ "duration_ms": 3106,
+ "wall_ms": 5264,
+ "attempts": 1,
+ "key": "503726e3879de7e6"
+}

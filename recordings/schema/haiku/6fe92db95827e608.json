@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * SUM(CASE WHEN l.discount_pct > 0 THEN l.net_amount ELSE 0 END) / NULLIF(SUM(l.net_amount), 0), 2) AS discounted_revenue_share_pct FROM marts.fct_order_lines l JOIN marts.fct_orders o ON o.order_id = l.order_id WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Revenue is defined by fct_orders.is_revenue = true, and 2025 is taken from fct_orders.order_date. Each order line is joined to its order to apply those filters. The share is the net_amount of lines with discount_pct > 0 divided by the net_amount of all revenue lines in 2025, times 100, rounded to 2 decimals. NULLIF guards against division by zero."
+ },
+ "cost_usd": 0.00068403,
+ "duration_ms": 4483,
+ "wall_ms": 7058,
+ "attempts": 1,
+ "key": "6fe92db95827e608"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE method = 'card') / NULLIF(COUNT(*), 0), 2) AS card_payment_pct FROM marts.fct_payments",
+  "explanation": "Computes the share of payments made by card, counted by number of payments across all rows in fct_payments (no status filter, since the question asks for all payments). The percentage is rounded to 2 decimals."
+ },
+ "cost_usd": 0.0006357299999999999,
+ "duration_ms": 2195,
+ "wall_ms": 3950,
+ "attempts": 1,
+ "key": "e60bffd69c463bcc"
+}

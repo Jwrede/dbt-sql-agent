@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n  SELECT order_month, SUM(net_revenue) AS revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2024-12-01'\n    AND order_date < DATE '2026-01-01'\n  GROUP BY order_month\n), growth AS (\n  SELECT order_month,\n         ROUND(100.0 * (revenue - LAG(revenue) OVER (ORDER BY order_month))\n               / NULLIF(LAG(revenue) OVER (ORDER BY order_month), 0), 2) AS mom_growth_pct\n  FROM monthly\n)\nSELECT order_month, mom_growth_pct\nFROM growth\nWHERE order_month >= DATE '2025-01-01'\nORDER BY order_month",
+  "explanation": "Revenue is the net revenue of completed orders, grouped by order month, with shipping fees excluded. Each month's growth is its change from the previous month, in percent. December 2024 is included in the calculation so January 2025 has a comparison, but only the 2025 months are returned."
+ },
+ "cost_usd": 0.015336199999999998,
+ "duration_ms": 3911,
+ "wall_ms": 5563,
+ "attempts": 1,
+ "key": "26a9ed0bb0251ce8"
+}

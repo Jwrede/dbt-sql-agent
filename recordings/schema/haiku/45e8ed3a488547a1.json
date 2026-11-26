@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.shipping_fee), 2) AS total_shipping_fees\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "Sums shipping_fee from marts.fct_orders for orders with status 'completed' and order_date in calendar year 2025. I assumed the status value is exactly 'completed' and that order_date is the date used to assign orders to 2025. I did not verify the status values against the data, so check that 'completed' matches the stored value."
+ },
+ "cost_usd": 0.00047293,
+ "duration_ms": 3085,
+ "wall_ms": 4968,
+ "attempts": 1,
+ "key": "45e8ed3a488547a1"
+}

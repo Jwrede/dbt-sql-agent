@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH units AS (\n  SELECT p.product_id, p.sku, p.product_name, SUM(ol.quantity) AS units_sold\n  FROM marts.fct_order_lines ol\n  JOIN marts.fct_orders o ON o.order_id = ol.order_id\n  JOIN marts.dim_products p ON p.product_id = ol.product_id\n  WHERE o.status = 'completed'\n    AND o.order_date >= DATE '2025-01-01'\n    AND o.order_date < DATE '2026-01-01'\n  GROUP BY p.product_id, p.sku, p.product_name\n), ranked AS (\n  SELECT product_id, sku, product_name, units_sold,\n         RANK() OVER (ORDER BY units_sold DESC) AS rnk\n  FROM units\n)\nSELECT product_id, sku, product_name, units_sold\nFROM ranked\nWHERE rnk = 1;",
+  "explanation": "This query finds the product with the most units sold in completed orders placed in 2025. It adds up the quantity on each order line, keeping only orders with status = 'completed' and an order date in calendar year 2025, and groups the totals by product. If two or more products tie for first place, it returns all of them.\n\nI assumed the status value is spelled 'completed' in lowercase; if the data uses a different spelling, the filter needs to change. I filtered on order status rather than the is_revenue flag because you asked about completed orders specifically."
+ },
+ "cost_usd": 0.021892599999999998,
+ "duration_ms": 7930,
+ "wall_ms": 9247,
+ "attempts": 1,
+ "key": "a5a8c998d47be2b2"
+}

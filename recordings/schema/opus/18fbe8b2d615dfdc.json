@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.net_revenue), 2) AS avg_order_value, COUNT(*) AS revenue_orders FROM marts.fct_orders o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The query averages net_revenue across 2025 orders and rounds the result to 2 decimals. It only counts orders where is_revenue is true, so cancelled orders and other non-revenue orders don't affect the average. It uses order_date to place orders in 2025, and the second column shows how many orders went into the average. Net revenue is the amount after discounts, not counting shipping fees."
+ },
+ "cost_usd": 0.0152366,
+ "duration_ms": 5970,
+ "wall_ms": 7419,
+ "attempts": 1,
+ "key": "18fbe8b2d615dfdc"
+}

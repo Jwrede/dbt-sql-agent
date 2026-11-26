@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT country, COUNT(*) AS customer_count FROM marts.dim_customers GROUP BY country ORDER BY customer_count DESC, country",
+  "explanation": "Counts customer accounts in dim_customers (one row per customer) grouped by country."
+ },
+ "cost_usd": 0.014902,
+ "duration_ms": 2255,
+ "wall_ms": 4298,
+ "attempts": 1,
+ "key": "73000e1c4912684e"
+}

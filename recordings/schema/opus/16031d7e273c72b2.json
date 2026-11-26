@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n  SELECT o.order_month, COUNT(*) AS completed_orders\n  FROM marts.fct_orders o\n  WHERE o.status = 'completed'\n    AND o.order_date >= DATE '2024-01-01'\n    AND o.order_date < DATE '2025-01-01'\n  GROUP BY o.order_month\n), ranked AS (\n  SELECT order_month, completed_orders,\n         RANK() OVER (ORDER BY completed_orders DESC) AS rnk\n  FROM monthly\n)\nSELECT order_month, completed_orders\nFROM ranked\nWHERE rnk = 1\nORDER BY order_month;",
+  "explanation": "This query counts the orders with status 'completed' in each month of 2024 and returns the month with the highest count. If two or more months tie for the top spot, it returns all of them. I counted only orders whose status is literally 'completed'. If you meant every order that counts as revenue (is_revenue = true), the filter would need to change, and the answer might too."
+ },
+ "cost_usd": 0.0195366,
+ "duration_ms": 6080,
+ "wall_ms": 7964,
+ "attempts": 1,
+ "key": "16031d7e273c72b2"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM created_at)::int AS created_year, COUNT(*) AS accounts_created FROM marts.dim_customers WHERE created_at IS NOT NULL GROUP BY 1 ORDER BY 1;",
+  "explanation": "Counts rows in marts.dim_customers grouped by the calendar year of created_at, the account creation date. Customers with a NULL created_at are excluded because they have no creation year. No columns in the schema are marked NOT AVAILABLE, so the question can be answered directly."
+ },
+ "cost_usd": 0.00044763,
+ "duration_ms": 4158,
+ "wall_ms": 5996,
+ "attempts": 1,
+ "key": "06f10e1438bc4949"
+}

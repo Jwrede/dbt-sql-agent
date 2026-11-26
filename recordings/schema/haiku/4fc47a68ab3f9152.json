@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(percentile_cont(0.5) WITHIN GROUP (ORDER BY o.net_revenue)::numeric, 2) AS median_net_order_value\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The median is taken over net_revenue of orders with status 'completed' and order_date in calendar 2025, using percentile_cont(0.5) for a true median. Assumptions I could not verify: the status literal is exactly 'completed' (I had no tool to check distinct status values), and \"net order value\" maps to net_revenue. I did not add an is_revenue filter because the question specifies completed orders; if completed orders can include non-revenue rows, add AND o.is_revenue. I have not executed the query, so the result is unverified."
+ },
+ "cost_usd": 0.00066493,
+ "duration_ms": 4995,
+ "wall_ms": 6867,
+ "attempts": 1,
+ "key": "4fc47a68ab3f9152"
+}

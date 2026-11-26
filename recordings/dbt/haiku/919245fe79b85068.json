@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT o.customer_id, MIN(o.order_date) AS first_completed_order_date FROM marts.fct_orders o WHERE o.customer_id = 42 AND o.is_revenue = true GROUP BY o.customer_id;",
+  "explanation": "Customer 42's first completed order is the earliest order_date among its orders with is_revenue = true (status = 'completed'). The query returns that date, or no rows if the customer has no completed orders."
+ },
+ "cost_usd": 0.00073663,
+ "duration_ms": 2861,
+ "wall_ms": 4544,
+ "attempts": 1,
+ "key": "919245fe79b85068"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.item_count), 2) AS avg_items_per_completed_order FROM marts.fct_orders o WHERE o.is_revenue = true AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Averages item_count over completed orders (is_revenue = true, i.e. status = 'completed') with order_date in calendar year 2025, since fiscal year equals calendar year. Rounded to 2 decimals. Uses only fct_orders, which has no restricted columns."
+ },
+ "cost_usd": 0.00070653,
+ "duration_ms": 2772,
+ "wall_ms": 5071,
+ "attempts": 1,
+ "key": "f16401bdadddf8d8"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT o.order_month, ROUND(SUM(o.net_revenue), 2) AS revenue\nFROM marts.fct_orders AS o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY o.order_month\nORDER BY o.order_month",
+  "explanation": "Revenue is the sum of net_revenue for orders flagged is_revenue, grouped by order month for orders dated in 2025 and sorted in calendar order. A month with no revenue orders would not appear."
+ },
+ "cost_usd": 0.0079022,
+ "duration_ms": 3153,
+ "wall_ms": 4750,
+ "attempts": 1,
+ "key": "bbd6854d397ac837"
+}

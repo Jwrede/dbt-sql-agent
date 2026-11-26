@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2024 THEN l.net_amount ELSE 0 END), 2) AS revenue_2024,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2025 THEN l.net_amount ELSE 0 END), 2) AS revenue_2025,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2025 THEN l.net_amount ELSE 0 END)\n           - SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2024 THEN l.net_amount ELSE 0 END), 2) AS revenue_increase_eur\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue\nGROUP BY p.category\nORDER BY revenue_increase_eur DESC\nLIMIT 1;",
+  "explanation": "Revenue is taken at line level (fct_order_lines.net_amount) and restricted to completed orders (is_revenue = true) via the join to fct_orders, since order-level net_revenue cannot be split by product category. Each line is assigned to the calendar year of its order_date (fiscal year = calendar year), and category comes from dim_products. The query computes 2024 and 2025 revenue per category, the difference, and returns the category with the largest increase. Shipping fees are excluded because they are not in net_amount."
+ },
+ "cost_usd": 0.00115073,
+ "duration_ms": 5512,
+ "wall_ms": 6898,
+ "attempts": 1,
+ "key": "15707e4942285e17"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT r.region, ROUND(SUM(o.net_revenue), 2) AS net_revenue\nFROM marts.fct_orders AS o\nJOIN marts.dim_sales_reps AS r ON r.sales_rep_id = o.sales_rep_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY r.region\nORDER BY SUM(o.net_revenue) DESC\nFETCH FIRST 1 ROWS WITH TIES",
+  "explanation": "Sums net revenue for orders flagged as revenue (is_revenue) and dated in calendar year 2025, grouped by the region of the order's sales rep. It returns the top region, or all tied regions if there is a tie. Orders with no matching sales rep are left out."
+ },
+ "cost_usd": 0.009318199999999999,
+ "duration_ms": 3786,
+ "wall_ms": 5818,
+ "attempts": 1,
+ "key": "fc3c0b362c50ef45"
+}

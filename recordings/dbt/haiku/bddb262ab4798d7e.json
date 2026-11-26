@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.segment, ROUND(SUM(o.net_revenue), 2) AS net_revenue_2025 FROM marts.fct_orders o JOIN marts.dim_customers c ON c.customer_id = o.customer_id WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY c.segment ORDER BY net_revenue_2025 DESC;",
+  "explanation": "Revenue per customer segment for 2025 counts only completed orders (is_revenue = true), with net_revenue summed per segment from dim_customers. Orders are filtered to order_date within calendar 2025, which is the fiscal year. Shipping fees are excluded because net_revenue does not include them."
+ },
+ "cost_usd": 0.0008245300000000001,
+ "duration_ms": 3670,
+ "wall_ms": 5467,
+ "attempts": 1,
+ "key": "bddb262ab4798d7e"
+}

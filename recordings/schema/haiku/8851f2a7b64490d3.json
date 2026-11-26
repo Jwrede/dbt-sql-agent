@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue), 2) AS german_revenue_q4_2025\nFROM marts.fct_orders o\nJOIN marts.dim_customers c\n  ON c.customer_id = o.customer_id\nWHERE c.country = 'Germany'\n  AND o.is_revenue = true\n  AND o.order_date >= DATE '2025-10-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "Revenue is defined by fct_orders.is_revenue = true and measured as net_revenue. I joined orders to dim_customers to filter on country = 'Germany' and restricted order_date to Q4 2025 (1 Oct to 31 Dec 2025), then summed net_revenue and rounded to 2 decimals. I have not run the query, so the exact country label ('Germany') is assumed to match the stored values."
+ },
+ "cost_usd": 0.00060873,
+ "duration_ms": 4014,
+ "wall_ms": 5765,
+ "attempts": 1,
+ "key": "8851f2a7b64490d3"
+}

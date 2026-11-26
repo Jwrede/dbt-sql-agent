@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.discount_amount), 2) AS discount_2025_eur FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Sums the line discounts (discount_amount, in EUR) on completed orders (is_revenue is true) with an order date in calendar year 2025. Cancelled, returned and open orders are excluded."
+ },
+ "cost_usd": 0.0127882,
+ "duration_ms": 2268,
+ "wall_ms": 4013,
+ "attempts": 1,
+ "key": "dda19844434f6326"
+}

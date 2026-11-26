@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no inventory or stock table. The listed tables (dim_customers, dim_products, dim_sales_reps, fct_order_lines, fct_orders, fct_payments) cover customers, products, sales reps, orders and payments. dim_products has no stock or quantity-on-hand column, and the order tables only record what was sold, not what is on hand. So the current stock level of the ergonomic office chair cannot be determined from this data. Stock figures would need to come from a warehouse or inventory system that is not part of this warehouse."
+ },
+ "cost_usd": 0.00067843,
+ "duration_ms": 2476,
+ "wall_ms": 4307,
+ "attempts": 1,
+ "key": "2f1a42b2d6a89b71"
+}

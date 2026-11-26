@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH cat_rev AS (\n  SELECT p.category,\n         SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2024 THEN l.net_amount ELSE 0 END) AS rev_2024,\n         SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2025 THEN l.net_amount ELSE 0 END) AS rev_2025\n  FROM marts.fct_order_lines l\n  JOIN marts.fct_orders o ON o.order_id = l.order_id\n  JOIN marts.dim_products p ON p.product_id = l.product_id\n  WHERE o.is_revenue\n    AND o.order_date >= DATE '2024-01-01'\n    AND o.order_date < DATE '2026-01-01'\n  GROUP BY p.category\n)\nSELECT category,\n       ROUND(rev_2024, 2) AS revenue_2024,\n       ROUND(rev_2025, 2) AS revenue_2025,\n       ROUND(rev_2025 - rev_2024, 2) AS revenue_increase\nFROM cat_rev\nORDER BY rev_2025 - rev_2024 DESC\nLIMIT 1;",
+  "explanation": "This query finds the category whose revenue grew the most from 2024 to 2025, and shows both years' totals and the increase. The figures are sums of line-level net amounts (after discounts), counting only orders where is_revenue is true, as the business definition requires. Each order is assigned to a year by its order date, and lines are grouped into categories through dim_products. None of the tables has a currency column, so I've assumed all amounts are in EUR and no conversion is needed. If two categories tie for the biggest increase, only one is returned."
+ },
+ "cost_usd": 0.0237246,
+ "duration_ms": 8593,
+ "wall_ms": 9877,
+ "attempts": 1,
+ "key": "6b597be08541a0db"
+}

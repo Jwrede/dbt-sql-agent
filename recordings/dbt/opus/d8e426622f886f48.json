@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS cancelled_orders_2025 FROM marts.fct_orders WHERE status = 'cancelled' AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01';",
+  "explanation": "Counts the orders in marts.fct_orders that have status 'cancelled' and an order_date in 2025 (fiscal year = calendar year)."
+ },
+ "cost_usd": 0.030848,
+ "duration_ms": 5683,
+ "wall_ms": 7288,
+ "attempts": 1,
+ "key": "d8e426622f886f48"
+}

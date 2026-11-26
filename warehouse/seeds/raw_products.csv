@@ -1,0 +1,41 @@
+product_id,sku,name,category,unit_price,unit_cost,is_active
+1,PAP-0001,"Copy paper A4 80g, 500 sheets",paper,4.90,2.60,true
+2,PAP-0002,"Copy paper A3 80g, 500 sheets",paper,9.80,5.50,true
+3,PAP-0003,"Recycled paper A4, 500 sheets",paper,5.40,3.10,true
+4,PAP-0004,Notebook A5 ruled,paper,2.20,0.90,true
+5,PAP-0005,"Sticky notes 76x76, 12 pads",paper,6.50,2.80,true
+6,PAP-0006,"Envelopes C4, 250",paper,18.00,9.20,true
+7,PAP-0007,"Flipchart pad, 5 pack",paper,39.00,21.00,true
+8,PAP-0008,"Label sheets A4, 100",paper,24.00,11.50,true
+9,FUR-0009,Office chair ergonomic,furniture,289.00,171.00,true
+10,FUR-0010,Standing desk 160x80,furniture,549.00,348.00,true
+11,FUR-0011,Filing cabinet 3 drawers,furniture,219.00,131.00,true
+12,FUR-0012,Meeting table 240x100,furniture,689.00,455.00,false
+13,FUR-0013,Monitor arm dual,furniture,129.00,58.00,true
+14,FUR-0014,Footrest adjustable,furniture,39.00,17.00,false
+15,FUR-0015,Shelf unit 5 levels,furniture,179.00,102.00,true
+16,FUR-0016,Visitor chair stackable,furniture,79.00,41.00,true
+17,ELE-0017,Monitor 27 inch QHD,electronics,319.00,236.00,true
+18,ELE-0018,USB-C docking station,electronics,189.00,121.00,true
+19,ELE-0019,Wireless keyboard and mouse,electronics,59.00,28.00,true
+20,ELE-0020,Headset with noise cancelling,electronics,149.00,86.00,true
+21,ELE-0021,Webcam 1080p,electronics,79.00,38.00,false
+22,ELE-0022,Laser printer mono,electronics,249.00,168.00,true
+23,ELE-0023,Toner cartridge black,electronics,89.00,44.00,true
+24,ELE-0024,Power strip 6 sockets,electronics,24.00,9.50,false
+25,CLE-0025,Hand soap 5 l,cleaning,14.00,5.90,true
+26,CLE-0026,"Paper towels, 20 rolls",cleaning,32.00,16.00,true
+27,CLE-0027,"Surface cleaner 1 l, 6 pack",cleaning,21.00,8.40,true
+28,CLE-0028,"Microfibre cloths, 50",cleaning,27.00,11.00,true
+29,CLE-0029,"Bin liners 120 l, 250",cleaning,36.00,17.50,true
+30,CLE-0030,"Disinfectant spray, 12",cleaning,44.00,22.00,true
+31,CLE-0031,"Toilet paper, 64 rolls",cleaning,41.00,23.00,true
+32,CLE-0032,Floor mop set,cleaning,64.00,29.00,true
+33,SAF-0033,First aid kit DIN 13157,safety,49.00,23.00,true
+34,SAF-0034,"Safety gloves, 12 pairs",safety,29.00,12.00,true
+35,SAF-0035,"Safety glasses, 10",safety,45.00,19.00,true
+36,SAF-0036,Fire extinguisher 6 kg,safety,79.00,42.00,true
+37,SAF-0037,"Hi-vis vest, 10",safety,35.00,14.00,true
+38,SAF-0038,"Ear plugs, 200 pairs",safety,39.00,15.00,true
+39,SAF-0039,Safety shoes S3,safety,89.00,51.00,true
+40,SAF-0040,Eye wash station,safety,99.00,52.00,true

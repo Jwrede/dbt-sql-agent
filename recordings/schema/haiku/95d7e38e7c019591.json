@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE LOWER(method) LIKE '%card%') / NULLIF(COUNT(*), 0), 2) AS card_payment_pct FROM marts.fct_payments;",
+  "explanation": "This counts every row in marts.fct_payments (each row is one payment) and divides the number of card payments by the total number of payments, multiplied by 100 and rounded to 2 decimals. The method column has no documented value list here, so I matched case-insensitively on '%card%' to catch values like 'card' or 'Card'. I could not run the query, so please check the distinct values of method first. If a value such as 'credit_card' exists alongside 'card', the pattern already covers it, but if the warehouse uses a different label for card payments, the filter needs to change."
+ },
+ "cost_usd": 0.00061943,
+ "duration_ms": 4664,
+ "wall_ms": 6506,
+ "attempts": 1,
+ "key": "95d7e38e7c019591"
+}

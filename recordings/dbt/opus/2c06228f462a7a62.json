@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.country, ROUND(SUM(o.net_revenue), 2) AS revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE o.is_revenue = true\n  AND c.segment = 'enterprise'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY c.country\nORDER BY revenue DESC;",
+  "explanation": "Revenue is the net revenue of completed orders only (is_revenue = true), without shipping. The query takes those orders from 2025 (the fiscal year is the calendar year) for enterprise customers. It adds them up by the customer's country and sorts from highest to lowest revenue."
+ },
+ "cost_usd": 0.0275766,
+ "duration_ms": 4468,
+ "wall_ms": 6326,
+ "attempts": 1,
+ "key": "2c06228f462a7a62"
+}

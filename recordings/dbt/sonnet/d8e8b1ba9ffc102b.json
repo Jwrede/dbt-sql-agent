@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT r.region, ROUND(SUM(o.net_revenue), 2) AS revenue_2025\nFROM marts.fct_orders AS o\nJOIN marts.dim_sales_reps AS r ON r.sales_rep_id = o.sales_rep_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY r.region\nORDER BY revenue_2025 DESC\nLIMIT 1",
+  "explanation": "Returns the sales region with the highest 2025 revenue, defined as net revenue of completed orders in EUR, excluding shipping. The region is that of the sales rep responsible for each order. The year is based on order date."
+ },
+ "cost_usd": 0.0142042,
+ "duration_ms": 3455,
+ "wall_ms": 5570,
+ "attempts": 1,
+ "key": "d8e8b1ba9ffc102b"
+}

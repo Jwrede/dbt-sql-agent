@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This question can't be answered. Salaries are in marts.dim_sales_reps.annual_salary, and that column is marked NOT AVAILABLE (restricted). This also applies to averages per region, because a group with only one or a few reps would still reveal individual salaries. I can give other figures per region instead, such as the number of sales reps, their hire dates, or revenue, gross margin and order counts per region from completed orders."
+ },
+ "cost_usd": 0.0249686,
+ "duration_ms": 5328,
+ "wall_ms": 6695,
+ "attempts": 1,
+ "key": "c2097b0708ab62f4"
+}

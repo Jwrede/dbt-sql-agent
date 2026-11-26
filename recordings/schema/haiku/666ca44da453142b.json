@@ -1,0 +1,18 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customers_without_completed_order\nFROM marts.dim_customers c\nWHERE NOT EXISTS (\n    SELECT 1\n    FROM marts.fct_orders o\n    WHERE o.customer_id = c.customer_id\n      AND LOWER(TRIM(o.status)) = 'completed'\n)",
+  "explanation": "Counts customers in marts.dim_customers with no order in marts.fct_orders whose status is 'completed'. A NOT EXISTS anti-join is used so customers with only non-completed orders (or no orders at all) are included. The status comparison is case- and whitespace-insensitive because I did not check the distinct status values. I filtered on status rather than is_revenue because the question specifically asks about completed orders. I did not run the query, so the status literal should be verified against the actual values in fct_orders.",
+  "sql_null": "false"
+ },
+ "cost_usd": 0.0006199300000000001,
+ "duration_ms": 4359,
+ "wall_ms": 6214,
+ "attempts": 1,
+ "key": "666ca44da453142b"
+}

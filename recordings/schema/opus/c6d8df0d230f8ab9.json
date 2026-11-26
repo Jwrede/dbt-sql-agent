@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.company_name, ROUND(SUM(o.net_revenue), 2) AS revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY c.customer_id, c.company_name\nORDER BY revenue DESC\nLIMIT 5;",
+  "explanation": "Adds up net_revenue for each customer over orders flagged is_revenue = true and dated in calendar year 2025, then returns the five highest totals with company names."
+ },
+ "cost_usd": 0.0152166,
+ "duration_ms": 6054,
+ "wall_ms": 7806,
+ "attempts": 1,
+ "key": "c6d8df0d230f8ab9"
+}

@@ -1,0 +1,58 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "23 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: pw
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 2s --health-timeout 5s --health-retries 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.13"]
+    env:
+      DSA_PGPORT: "5432"
+      DBT_PROFILES_DIR: warehouse
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e .[dev,dbt] -c ci-constraints.txt
+      - name: unit tests (no database)
+        run: pytest -v tests/test_guard.py tests/test_evaluate.py
+      - name: seeds are reproducible
+        run: |
+          python scripts/gen_seeds.py /tmp/seeds
+          for f in warehouse/seeds/*.csv; do cmp "$f" "/tmp/seeds/$(basename "$f")"; done
+      - name: dbt build (seeds, models, data tests)
+        run: dbt build --project-dir warehouse
+      - name: agent role, column grants and audit log from the dbt manifest
+        run: dbt-sql-agent setup
+      - name: integration tests (PostgreSQL)
+        env:
+          DSA_TEST_DB: "1"
+        run: pytest -v tests/test_db.py
+      - name: measurement replay must reproduce the committed results
+        run: |
+          dbt-sql-agent measure --mode replay --model haiku --model sonnet --model opus --out /tmp/results
+          diff -u results/summary.json /tmp/results/summary.json
+          for f in results/*.jsonl; do diff -u "$f" "/tmp/results/$(basename "$f")"; done
+      - name: example (replayed question, audit log)
+        run: |
+          dbt-sql-agent ask "What was our revenue in 2025?" --model sonnet --mode replay --recordings recordings/dbt
+          dbt-sql-agent ask "What is the phone number of the contact person at customer 17?" --model sonnet --mode replay --recordings recordings/dbt
+          dbt-sql-agent audit -n 3

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.country, ROUND(SUM(o.net_revenue), 2) AS revenue FROM marts.fct_orders AS o JOIN marts.dim_customers AS c ON c.customer_id = o.customer_id WHERE o.is_revenue AND c.segment = 'enterprise' AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY c.country ORDER BY revenue DESC",
+  "explanation": "Net revenue in EUR of completed orders placed in 2025 by enterprise customers, grouped by customer country, highest first. Shipping fees are excluded. Countries with no such revenue don't appear."
+ },
+ "cost_usd": 0.0134642,
+ "duration_ms": 2707,
+ "wall_ms": 4484,
+ "attempts": 1,
+ "key": "8d4b1e276f95fde5"
+}

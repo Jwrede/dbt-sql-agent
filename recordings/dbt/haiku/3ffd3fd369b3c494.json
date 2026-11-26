@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT l.product_id) AS distinct_products_ordered\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_customers AS c ON c.customer_id = o.customer_id\nWHERE c.country = 'FR'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The query counts distinct product_id values from order lines whose orders belong to customers with country 'FR' (dim_customers) and have an order_date in 2025. No status filter is applied, since the question counts orders of any status. Orders are linked to customers via customer_id and lines to orders via order_id. No personal-data columns are used."
+ },
+ "cost_usd": 0.00085183,
+ "duration_ms": 3567,
+ "wall_ms": 5341,
+ "attempts": 1,
+ "key": "3ffd3fd369b3c494"
+}

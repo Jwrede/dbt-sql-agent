@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(COALESCE(SUM(o.net_revenue), 0), 2) AS net_revenue_eur FROM marts.fct_orders AS o JOIN marts.dim_customers AS c ON c.customer_id = o.customer_id WHERE o.is_revenue AND c.country = 'DE' AND o.order_date >= DATE '2025-10-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Net revenue in EUR from completed orders only (shipping fees excluded), for customers with country code DE, with order dates from 2025-10-01 to 2025-12-31. The fiscal year equals the calendar year, so Q4 is October to December."
+ },
+ "cost_usd": 0.013480200000000001,
+ "duration_ms": 21448,
+ "wall_ms": 22854,
+ "attempts": 1,
+ "key": "f3a897b9d37cec68"
+}

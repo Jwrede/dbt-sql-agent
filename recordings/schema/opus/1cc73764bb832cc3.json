@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT o.customer_id) AS customers_2024_not_2025\nFROM marts.fct_orders o\nWHERE LOWER(o.status) = 'completed'\n  AND o.order_date >= DATE '2024-01-01'\n  AND o.order_date < DATE '2025-01-01'\n  AND NOT EXISTS (\n    SELECT 1\n    FROM marts.fct_orders o2\n    WHERE o2.customer_id = o.customer_id\n      AND LOWER(o2.status) = 'completed'\n      AND o2.order_date >= DATE '2025-01-01'\n      AND o2.order_date < DATE '2026-01-01'\n  );",
+  "explanation": "This query counts the distinct customers who had at least one completed order dated in 2024 and no completed order dated in 2025. I took \"completed\" to mean orders whose status is 'completed', and the check ignores upper or lower case. I didn't use the is_revenue flag, because it may also cover other statuses such as shipped orders. If you meant \"orders that count as revenue\", replace the status check with is_revenue = true. Each year runs from January 1 to December 31, based on order_date."
+ },
+ "cost_usd": 0.020800599999999995,
+ "duration_ms": 7822,
+ "wall_ms": 9435,
+ "attempts": 1,
+ "key": "1cc73764bb832cc3"
+}

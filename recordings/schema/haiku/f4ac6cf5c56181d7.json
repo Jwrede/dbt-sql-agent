@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT o.customer_id) AS customers_completed_2024_not_2025\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2024-01-01'\n  AND o.order_date < DATE '2025-01-01'\n  AND NOT EXISTS (\n    SELECT 1\n    FROM marts.fct_orders o2\n    WHERE o2.customer_id = o.customer_id\n      AND o2.status = 'completed'\n      AND o2.order_date >= DATE '2025-01-01'\n      AND o2.order_date < DATE '2026-01-01'\n  );",
+  "explanation": "Counts distinct customers with at least one completed order dated in 2024 who have no completed order dated in 2025. Completed is taken as status = 'completed' on marts.fct_orders, with order_date determining the year. I did not verify the exact status values in the data, so if 'completed' is not the literal status label, the filter needs adjusting."
+ },
+ "cost_usd": 0.0006298300000000001,
+ "duration_ms": 4169,
+ "wall_ms": 6020,
+ "attempts": 1,
+ "key": "f4ac6cf5c56181d7"
+}

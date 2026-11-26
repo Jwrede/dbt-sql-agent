@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(p.payment_id) AS late_payments\nFROM marts.fct_payments AS p\nJOIN marts.fct_orders AS o ON o.order_id = p.order_id\nWHERE p.method = 'invoice'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\n  AND p.paid_at - o.order_date > 30",
+  "explanation": "Counts payments with method 'invoice' on orders placed in 2025 where the payment date is more than 30 days after the order date (day 31 or later). It counts payments, not orders, so an order with several late payments counts each one. No order status or revenue filter is applied, since the question doesn't ask for one. It assumes the invoice method is stored as the lowercase value 'invoice'."
+ },
+ "cost_usd": 0.0093442,
+ "duration_ms": 4004,
+ "wall_ms": 6045,
+ "attempts": 1,
+ "key": "e74628f0ae0b762c"
+}

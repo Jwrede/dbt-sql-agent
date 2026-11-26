@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT o.sales_rep_id, ROUND(SUM(o.net_revenue), 2) AS total_net_revenue\nFROM marts.fct_orders o\nWHERE o.is_revenue\n  AND o.sales_rep_id IS NOT NULL\nGROUP BY o.sales_rep_id\nORDER BY total_net_revenue DESC\nLIMIT 1;",
+  "explanation": "The warehouse has no compensation or commission data, so \"earns the most\" is interpreted as the sales rep with the highest total net revenue. The query sums net_revenue from revenue-recognized orders (is_revenue = true) per sales_rep_id in marts.fct_orders, and returns the top rep. If earnings are based on commission or gross margin instead, the query would need to change accordingly."
+ },
+ "cost_usd": 0.00067223,
+ "duration_ms": 4917,
+ "wall_ms": 6788,
+ "attempts": 1,
+ "key": "b859e176806a1bbc"
+}

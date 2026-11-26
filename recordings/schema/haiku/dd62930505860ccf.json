@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.net_revenue), 2) AS avg_order_value FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01';",
+  "explanation": "Average order value is the mean net_revenue per order, limited to revenue orders (is_revenue = true) with order_date in calendar year 2025. Orders that are not revenue-generating are excluded. Net revenue is used as the order value because it is the revenue measure after discounts. The result is rounded to 2 decimals."
+ },
+ "cost_usd": 0.00050023,
+ "duration_ms": 3351,
+ "wall_ms": 5087,
+ "attempts": 1,
+ "key": "dd62930505860ccf"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(percentile_cont(0.5) WITHIN GROUP (ORDER BY o.net_revenue)::numeric, 2) AS median_net_order_value_eur\nFROM marts.fct_orders AS o\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The median is taken over the net_revenue of each order. Only completed orders count, which is what is_revenue = true selects. The filter covers order_date in calendar 2025, since fiscal year equals calendar year. percentile_cont(0.5) gives the median, rounded to 2 decimals in EUR. Shipping fees are excluded because net_revenue does not include them."
+ },
+ "cost_usd": 0.0008167300000000001,
+ "duration_ms": 3463,
+ "wall_ms": 5122,
+ "attempts": 1,
+ "key": "3d6560da516e9a2b"
+}

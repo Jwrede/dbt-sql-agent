@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.item_count), 2) AS avg_items_per_order\nFROM marts.fct_orders AS o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This averages item_count over orders dated in 2025 with status 'completed'. Two assumptions need checking, as no column descriptions define them. First, \"completed\" is taken to be the literal status value 'completed', not the broader is_revenue flag. Second, item_count is taken to be the number of items per order. It could instead count order lines rather than units. If you mean units, sum quantity from marts.fct_order_lines for each order and average that."
+ },
+ "cost_usd": 0.0090742,
+ "duration_ms": 3908,
+ "wall_ms": 5831,
+ "attempts": 1,
+ "key": "e1ae5803a39f7758"
+}

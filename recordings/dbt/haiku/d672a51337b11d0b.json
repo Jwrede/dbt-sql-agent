@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH rev_2025 AS (\n  SELECT customer_id, SUM(net_revenue) AS customer_revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2025-01-01'\n    AND order_date < DATE '2026-01-01'\n  GROUP BY customer_id\n),\ntop10 AS (\n  SELECT customer_revenue\n  FROM rev_2025\n  ORDER BY customer_revenue DESC\n  LIMIT 10\n)\nSELECT\n  ROUND(100.0 * (SELECT SUM(customer_revenue) FROM top10)\n        / (SELECT SUM(customer_revenue) FROM rev_2025), 2) AS top10_customer_revenue_share_pct\n",
+  "explanation": "Revenue is counted only from completed orders (is_revenue = true) with order_date in 2025. Each customer's 2025 net revenue is summed, the ten largest customers are selected by that total, and their combined revenue is divided by total 2025 revenue across all customers. The result is rounded to 2 decimals. If customers tie at the 10th position, LIMIT 10 picks one arbitrarily, so the result could shift slightly in that case."
+ },
+ "cost_usd": 0.00094403,
+ "duration_ms": 5053,
+ "wall_ms": 6802,
+ "attempts": 1,
+ "key": "d672a51337b11d0b"
+}

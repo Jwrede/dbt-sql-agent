@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE status ILIKE 'return%') / NULLIF(COUNT(*), 0), 2) AS returned_pct_2025 FROM marts.fct_orders WHERE order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01';",
+  "explanation": "The denominator is all orders in marts.fct_orders with order_date in calendar 2025, regardless of status. The numerator counts orders whose status indicates a return. I have not seen the distinct status values, so the filter uses ILIKE 'return%' to match 'returned' or similar labels; if the warehouse uses a different exact label, the filter should be checked against SELECT DISTINCT status. The result is rounded to 2 decimals. I could not execute the query to verify it against the data."
+ },
+ "cost_usd": 0.0006548300000000001,
+ "duration_ms": 4552,
+ "wall_ms": 6774,
+ "attempts": 1,
+ "key": "247490dc5ba8eb06"
+}

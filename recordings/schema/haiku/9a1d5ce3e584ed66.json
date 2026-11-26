@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT customer_id) AS customer_count FROM marts.dim_customers;",
+  "explanation": "Counts distinct customer_id values in marts.dim_customers, which holds one row per customer. This counts all customers in the dimension, including any with no orders. If you want only customers who have placed at least one order, the count should be restricted using lifetime_orders > 0 or first_order_date IS NOT NULL."
+ },
+ "cost_usd": 0.00040713,
+ "duration_ms": 3302,
+ "wall_ms": 5080,
+ "attempts": 1,
+ "key": "9a1d5ce3e584ed66"
+}

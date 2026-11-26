@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS late_payments\nFROM marts.fct_payments p\nJOIN marts.fct_orders o ON o.order_id = p.order_id\nWHERE p.method = 'invoice'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\n  AND (p.paid_at - o.order_date) > 30",
+  "explanation": "Counts invoice payments for orders placed in 2025 where days to pay (paid_at - order_date) is more than 30. All order statuses are included because the question is about payments, not revenue."
+ },
+ "cost_usd": 0.0263486,
+ "duration_ms": 3478,
+ "wall_ms": 5183,
+ "attempts": 1,
+ "key": "f16f51ee3d2ed665"
+}

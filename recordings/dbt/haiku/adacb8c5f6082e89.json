@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customers_without_completed_order FROM marts.dim_customers WHERE first_order_date IS NULL;",
+  "explanation": "marts.dim_customers.first_order_date is the date of the first completed order and is null when a customer has none. Counting rows where it is null gives the number of customers who have never had a completed order. Equivalently, lifetime_orders = 0 would give the same result, since lifetime_* columns count completed orders only."
+ },
+ "cost_usd": 0.0007757300000000001,
+ "duration_ms": 3174,
+ "wall_ms": 5351,
+ "attempts": 1,
+ "key": "adacb8c5f6082e89"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue) / NULLIF(COUNT(*), 0), 2) AS aov_2025\nFROM marts.fct_orders AS o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Average order value is the net revenue of completed orders divided by the number of completed orders, for orders placed in calendar year 2025. The result is in EUR and excludes shipping fees."
+ },
+ "cost_usd": 0.0128902,
+ "duration_ms": 2483,
+ "wall_ms": 4125,
+ "attempts": 1,
+ "key": "8f732bdaf277e947"
+}

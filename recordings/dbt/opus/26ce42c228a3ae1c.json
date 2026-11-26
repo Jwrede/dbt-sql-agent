@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(ol.net_amount), 2) AS discontinued_revenue\nFROM marts.fct_order_lines ol\nJOIN marts.fct_orders o ON o.order_id = ol.order_id\nJOIN marts.dim_products p ON p.product_id = ol.product_id\nWHERE o.is_revenue = true\n  AND p.is_active = false;",
+  "explanation": "Adds up the net line amounts (after discounts, without shipping) for discontinued products (is_active = false). Only lines from completed orders (is_revenue = true) count. The data covers 2024-01-01 to 2025-12-31, so no date filter is needed."
+ },
+ "cost_usd": 0.0266126,
+ "duration_ms": 4111,
+ "wall_ms": 5774,
+ "attempts": 1,
+ "key": "26ce42c228a3ae1c"
+}

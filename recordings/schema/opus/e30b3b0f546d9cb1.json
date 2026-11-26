@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue), 2) AS net_revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE c.country = 'Germany'\n  AND o.is_revenue\n  AND o.order_date >= DATE '2025-10-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This query adds up net revenue from orders by German customers dated 1 October to 31 December 2025, rounded to 2 decimals. It only counts orders flagged as revenue (`is_revenue`), as the business definition requires, and uses net revenue, which excludes discounts and shipping fees. Two assumptions: the country is stored exactly as 'Germany', and the quarter goes by order date, not payment date."
+ },
+ "cost_usd": 0.0172966,
+ "duration_ms": 6404,
+ "wall_ms": 8121,
+ "attempts": 1,
+ "key": "e30b3b0f546d9cb1"
+}

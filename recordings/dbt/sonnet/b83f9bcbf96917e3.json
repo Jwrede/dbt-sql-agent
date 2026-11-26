@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This can't be answered from the available data. None of the listed tables holds customer support tickets: they cover customers, products, sales reps, orders, order lines and payments only. Enterprise customers can be identified through marts.dim_customers.segment, but there is no ticket data to count for 2025. A source of support ticket records (with customer ID and opened date) would need to be added to the warehouse."
+ },
+ "cost_usd": 0.0124002,
+ "duration_ms": 2191,
+ "wall_ms": 3726,
+ "attempts": 1,
+ "key": "b83f9bcbf96917e3"
+}

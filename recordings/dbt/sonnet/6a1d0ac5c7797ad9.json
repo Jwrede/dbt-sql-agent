@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS order_count FROM marts.fct_orders WHERE sales_rep_id = 3 AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "Counts all orders assigned to sales representative 3 with an order date in 2025. No status filter is applied because the question asks for orders of any status."
+ },
+ "cost_usd": 0.0124042,
+ "duration_ms": 2063,
+ "wall_ms": 4134,
+ "attempts": 1,
+ "key": "6a1d0ac5c7797ad9"
+}

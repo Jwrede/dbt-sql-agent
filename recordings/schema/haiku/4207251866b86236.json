@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS cancelled_orders_2025\nFROM marts.fct_orders\nWHERE order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01'\n  AND status ILIKE 'cancel%';",
+  "explanation": "Counts rows in marts.fct_orders with an order_date in calendar year 2025 whose status indicates cancellation. The status value is not documented in the schema, so I used a case-insensitive prefix match ('cancel%') to catch variants such as 'cancelled' or 'Cancelled'. I have not run the query, so confirm the exact status spelling in the data. The query counts orders regardless of is_revenue, which is what \"orders placed ... were cancelled\" asks for."
+ },
+ "cost_usd": 0.0004959300000000001,
+ "duration_ms": 4211,
+ "wall_ms": 6071,
+ "attempts": 1,
+ "key": "4207251866b86236"
+}

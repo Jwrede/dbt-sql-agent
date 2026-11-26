@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.company_name, ROUND(SUM(o.net_revenue), 2) AS revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY c.customer_id, c.company_name\nORDER BY revenue DESC\nLIMIT 5;",
+  "explanation": "Revenue is defined by fct_orders.is_revenue = true, and the amount is net_revenue. I filtered to orders dated in calendar 2025, summed net_revenue per customer, and joined dim_customers for the company name. I grouped by customer_id as well as company_name so two customers with the same name are not merged. The results are the top five by revenue, descending. I did not use dim_customers.lifetime_net_revenue because it covers all time, not 2025."
+ },
+ "cost_usd": 0.00060923,
+ "duration_ms": 3858,
+ "wall_ms": 5965,
+ "attempts": 1,
+ "key": "00bcd54f63f2a5ec"
+}

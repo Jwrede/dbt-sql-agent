@@ -1,0 +1,12 @@
+kestrel_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DSA_PGHOST', '127.0.0.1') }}"
+      port: "{{ env_var('DSA_PGPORT', '5432') | as_number }}"
+      user: "{{ env_var('DSA_PGUSER', 'postgres') }}"
+      password: "{{ env_var('DSA_PGPASSWORD', 'pw') }}"
+      dbname: "{{ env_var('DSA_PGDATABASE', 'postgres') }}"
+      schema: public
+      threads: 4

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customer_count FROM marts.dim_customers",
+  "explanation": "Counts all customers in the customer dimension, one row per customer. This includes any who have never placed an order. If you meant only customers who have ordered, or recently active ones, the count would need a filter."
+ },
+ "cost_usd": 0.0065622,
+ "duration_ms": 2522,
+ "wall_ms": 4177,
+ "attempts": 1,
+ "key": "59f3f0a1249c11fd"
+}

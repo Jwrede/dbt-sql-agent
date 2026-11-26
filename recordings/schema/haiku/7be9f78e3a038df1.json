@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS open_order_count FROM marts.fct_orders WHERE status = 'open';",
+  "explanation": "This assumes an order is \"open\" when its status is 'open'. The schema doesn't document the allowed values of marts.fct_orders.status, so this literal is a guess. Before relying on the number, run SELECT DISTINCT status FROM marts.fct_orders to confirm the correct status value(s) for open orders (for example, if the warehouse uses 'pending' or 'processing' instead). If open means anything other than a single status, the WHERE clause needs to change accordingly."
+ },
+ "cost_usd": 0.00060063,
+ "duration_ms": 4646,
+ "wall_ms": 6495,
+ "attempts": 1,
+ "key": "7be9f78e3a038df1"
+}

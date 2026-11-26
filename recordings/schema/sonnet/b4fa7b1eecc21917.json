@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * SUM(o.gross_margin) / NULLIF(SUM(o.net_revenue), 0), 2) AS gross_margin_pct\nFROM marts.fct_orders AS o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Gross margin percent is calculated as total gross margin divided by total net revenue, weighted across all orders rather than averaged per order. It covers orders with an order date in 2025. \"Completed\" is taken to mean status = 'completed'. The status values and the is_revenue definition aren't documented in what I was given. If your revenue definition includes other statuses, filter on is_revenue instead."
+ },
+ "cost_usd": 0.0093442,
+ "duration_ms": 3940,
+ "wall_ms": 5874,
+ "attempts": 1,
+ "key": "b4fa7b1eecc21917"
+}

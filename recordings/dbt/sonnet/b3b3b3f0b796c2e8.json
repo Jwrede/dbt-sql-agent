@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(net_revenue), 2) AS net_revenue_2025 FROM marts.fct_orders WHERE is_revenue = true AND order_date >= DATE '2025-01-01' AND order_date <= DATE '2025-12-31'",
+  "explanation": "Net revenue of completed orders (is_revenue = true), excluding shipping, for orders placed in calendar year 2025."
+ },
+ "cost_usd": 0.0124503,
+ "duration_ms": 2430,
+ "wall_ms": 5080,
+ "attempts": 1,
+ "key": "b3b3b3f0b796c2e8"
+}

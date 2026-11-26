@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE p.method = 'card') / NULLIF(COUNT(*), 0), 2) AS card_payment_pct FROM marts.fct_payments AS p",
+  "explanation": "This is the number of payments with method 'card' divided by the total number of payments, as a percentage rounded to 2 decimals. It covers all payments, including those for returned orders, because the question asks about all payments rather than revenue."
+ },
+ "cost_usd": 0.0126942,
+ "duration_ms": 2324,
+ "wall_ms": 4220,
+ "attempts": 1,
+ "key": "7ddd6b3aab377cda"
+}

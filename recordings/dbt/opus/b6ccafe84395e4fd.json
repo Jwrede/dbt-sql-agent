@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.product_name, ROUND(SUM(l.net_amount - l.cogs), 2) AS gross_margin\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'\nGROUP BY p.product_id, p.product_name\nORDER BY SUM(l.net_amount - l.cogs) DESC\nLIMIT 3;",
+  "explanation": "Gross margin per product = line net amount minus line COGS. Only lines of completed orders (is_revenue = true) placed in 2025 are counted. The query returns the top three products by margin, rounded to 2 decimals."
+ },
+ "cost_usd": 0.028192599999999998,
+ "duration_ms": 4169,
+ "wall_ms": 5862,
+ "attempts": 1,
+ "key": "b6ccafe84395e4fd"
+}

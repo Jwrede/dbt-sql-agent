@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(100.0 * (SUM(l.net_amount) - SUM(l.cogs)) / NULLIF(SUM(l.net_amount), 0), 2) AS gross_margin_pct\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.category\nORDER BY gross_margin_pct DESC",
+  "explanation": "Gross margin % per category is (net amount − COGS) / net amount, calculated from the summed order lines rather than by averaging line percentages. It covers orders dated in 2025 and counts only those flagged as revenue (is_revenue). Shipping fees are not included, since they are recorded per order and not per product line. Results are sorted from highest to lowest margin."
+ },
+ "cost_usd": 0.0096122,
+ "duration_ms": 4101,
+ "wall_ms": 5663,
+ "attempts": 1,
+ "key": "b71e88d6d1845de2"
+}

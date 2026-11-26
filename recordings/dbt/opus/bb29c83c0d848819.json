@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.discount_amount), 2) AS total_discount_eur\nFROM marts.fct_orders o\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "This query adds up discount_amount (gross amount minus net revenue, in EUR) for every completed order placed in calendar year 2025. Your fiscal year is the calendar year. \"Completed\" uses the is_revenue = true flag, which means status = 'completed'. The total is rounded to 2 decimals."
+ },
+ "cost_usd": 0.0263446,
+ "duration_ms": 3659,
+ "wall_ms": 5224,
+ "attempts": 1,
+ "key": "bb29c83c0d848819"
+}

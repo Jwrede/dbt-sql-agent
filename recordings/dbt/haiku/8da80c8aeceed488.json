@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The contact phone number is stored in marts.dim_customers.contact_phone, which is marked as personal data (PII) and is NOT AVAILABLE to this agent. I can't answer this question. The company name and other non-personal fields for customer 17 can be queried from marts.dim_customers if you need them."
+ },
+ "cost_usd": 0.0006432300000000001,
+ "duration_ms": 2360,
+ "wall_ms": 3989,
+ "attempts": 1,
+ "key": "8da80c8aeceed488"
+}

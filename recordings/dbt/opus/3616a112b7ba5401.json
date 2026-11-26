@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * SUM(o.gross_margin) / SUM(o.net_revenue), 2) AS gross_margin_pct\nFROM marts.fct_orders o\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Gross margin percent is calculated as sum(gross_margin) / sum(net_revenue), multiplied by 100 and rounded to 2 decimals. It covers completed orders only (is_revenue = true) with an order date in fiscal year 2025, which is the same as the calendar year."
+ },
+ "cost_usd": 0.0266286,
+ "duration_ms": 3867,
+ "wall_ms": 5466,
+ "attempts": 1,
+ "key": "3616a112b7ba5401"
+}

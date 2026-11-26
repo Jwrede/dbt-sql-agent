@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT order_month, ROUND(SUM(net_revenue), 2) AS net_revenue_eur FROM marts.fct_orders WHERE is_revenue = true AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01' GROUP BY order_month ORDER BY order_month;",
+  "explanation": "Revenue is net_revenue of completed orders only (is_revenue = true), so cancelled, returned and open orders are excluded. Shipping fees are not in net_revenue. Orders are filtered to order_date in 2025 and grouped by order_month, which is the first day of each month, so the rows come out in calendar order. Amounts are rounded to 2 decimals."
+ },
+ "cost_usd": 0.00079843,
+ "duration_ms": 3677,
+ "wall_ms": 5848,
+ "attempts": 1,
+ "key": "6727b4ce04730817"
+}

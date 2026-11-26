@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH cust AS (\n  SELECT o.customer_id, SUM(o.net_revenue) AS rev\n  FROM marts.fct_orders o\n  WHERE o.is_revenue\n    AND o.order_date >= DATE '2025-01-01'\n    AND o.order_date < DATE '2026-01-01'\n  GROUP BY o.customer_id\n), top10 AS (\n  SELECT rev FROM cust ORDER BY rev DESC LIMIT 10\n)\nSELECT\n  ROUND((SELECT SUM(rev) FROM top10), 2) AS top10_revenue,\n  ROUND((SELECT SUM(rev) FROM cust), 2) AS total_revenue,\n  ROUND(100.0 * (SELECT SUM(rev) FROM top10) / NULLIF((SELECT SUM(rev) FROM cust), 0), 2) AS top10_share_pct",
+  "explanation": "The query adds up 2025 revenue for each customer. It only counts orders flagged as revenue (is_revenue = true), uses net revenue, and includes orders dated 1 January to 31 December 2025. It then picks the ten customers with the most revenue and divides their total by the total for all customers. The result has three columns: the top ten's revenue, total 2025 revenue, and the top ten's share as a percentage, all rounded to 2 decimals. If customers tie for 10th place, only one of them is kept, so the share can shift slightly depending on which one."
+ },
+ "cost_usd": 0.0204366,
+ "duration_ms": 6997,
+ "wall_ms": 8437,
+ "attempts": 1,
+ "key": "c04c6f55d3469ce0"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no forecast data. None of the tables (dim_customers, dim_products, dim_sales_reps, fct_order_lines, fct_orders, fct_payments) contains forecasted, budgeted, or projected figures; they only hold historical transactional records. A forecast cannot be read from these tables, so I can't answer this as asked.\n\nIf the goal is to know actual revenue for Q1 2026, that can be computed from marts.fct_orders using is_revenue = true and net_revenue, filtered to order_date between 2026-01-01 and 2026-03-31. Note that today is 2026-11-26, so Q1 2026 is already in the past and actuals exist. I can write that query if you want it. Forecasting itself would need a forecast source, such as a planning table or model output, that isn't in this warehouse."
+ },
+ "cost_usd": 0.00052753,
+ "duration_ms": 4255,
+ "wall_ms": 6293,
+ "attempts": 1,
+ "key": "b4c5164ff0ed5564"
+}

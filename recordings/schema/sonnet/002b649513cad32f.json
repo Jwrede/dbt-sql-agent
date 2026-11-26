@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS discounted_orders FROM marts.fct_orders AS o WHERE o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' AND o.discount_amount > 0",
+  "explanation": "Counts orders with an order date in 2025 and a discount amount above zero. All statuses are included, as requested, so there is no revenue filter."
+ },
+ "cost_usd": 0.0072001999999999995,
+ "duration_ms": 2814,
+ "wall_ms": 4470,
+ "attempts": 1,
+ "key": "002b649513cad32f"
+}

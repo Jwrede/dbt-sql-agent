@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS active_products FROM marts.dim_products WHERE is_active",
+  "explanation": "Counts the products where is_active is true. Discontinued products are excluded."
+ },
+ "cost_usd": 0.0116882,
+ "duration_ms": 1709,
+ "wall_ms": 3249,
+ "attempts": 1,
+ "key": "dcb243d795482765"
+}

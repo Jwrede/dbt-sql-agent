@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH gaps AS (\n  SELECT o.order_date - LAG(o.order_date) OVER (PARTITION BY o.customer_id ORDER BY o.order_date, o.order_id) AS days_between\n  FROM marts.fct_orders AS o\n  JOIN marts.dim_customers AS c ON c.customer_id = o.customer_id\n  WHERE o.is_revenue AND c.segment = 'enterprise'\n)\nSELECT ROUND(AVG(days_between), 2) AS avg_days_between_orders\nFROM gaps\nWHERE days_between IS NOT NULL",
+  "explanation": "For each enterprise customer, completed orders are sorted by date and the days since the previous completed order are calculated. The result averages all these gaps together, so customers with more orders carry more weight. It is not an average of per-customer averages. Two orders on the same day count as a 0-day gap, and customers with only one completed order contribute nothing."
+ },
+ "cost_usd": 0.0150102,
+ "duration_ms": 4020,
+ "wall_ms": 5917,
+ "attempts": 1,
+ "key": "1608e128be438000"
+}

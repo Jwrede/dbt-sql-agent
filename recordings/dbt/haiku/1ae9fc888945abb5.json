@@ -1,0 +1,18 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH yearly_revenue AS (\n  SELECT\n    customer_id,\n    SUM(CASE WHEN EXTRACT(YEAR FROM order_date) = 2024 THEN net_revenue ELSE 0 END) AS rev_2024,\n    SUM(CASE WHEN EXTRACT(YEAR FROM order_date) = 2025 THEN net_revenue ELSE 0 END) AS rev_2025\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2024-01-01'\n    AND order_date < DATE '2026-01-01'\n  GROUP BY customer_id\n)\nSELECT COUNT(*) AS customers_below_half_revenue\nFROM yearly_revenue\nWHERE rev_2024 > 0\n  AND rev_2025 < 0.5 * rev_2024",
+  "explanation": "Revenue is taken only from completed orders (is_revenue = true) in fct_orders, summed per customer and per order year (fiscal year = calendar year). A customer counts if they had positive 2024 net revenue and 2025 net revenue below half of the 2024 figure. Customers with no 2025 revenue are included, since their 2025 revenue is treated as 0. The query returns a single count.",
+  "sql_null": "null"
+ },
+ "cost_usd": 0.00102823,
+ "duration_ms": 5003,
+ "wall_ms": 6676,
+ "attempts": 1,
+ "key": "1ae9fc888945abb5"
+}

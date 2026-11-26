@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2024 THEN l.net_amount ELSE 0 END), 2) AS revenue_2024,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2025 THEN l.net_amount ELSE 0 END), 2) AS revenue_2025,\n       ROUND(SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2025 THEN l.net_amount ELSE 0 END)\n           - SUM(CASE WHEN EXTRACT(YEAR FROM o.order_date) = 2024 THEN l.net_amount ELSE 0 END), 2) AS revenue_increase\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2026-01-01'\nGROUP BY p.category\nORDER BY revenue_increase DESC\nLIMIT 1;",
+  "explanation": "The query adds up line net amounts for each product category in 2024 and in 2025, using completed orders only (is_revenue = true). It subtracts the 2024 total from the 2025 total and returns the category with the largest increase in EUR. Shipping fees are left out. Part of the increase comes from the 4% list price rise on 2025-01-01, not only from selling more."
+ },
+ "cost_usd": 0.0335366,
+ "duration_ms": 6384,
+ "wall_ms": 7807,
+ "attempts": 1,
+ "key": "f613d2f4f9fae95e"
+}

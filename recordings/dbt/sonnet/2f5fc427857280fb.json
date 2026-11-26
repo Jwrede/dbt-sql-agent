@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customer_count FROM (SELECT o.customer_id FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY o.customer_id HAVING SUM(o.net_revenue) > 50000) AS c",
+  "explanation": "Counts customers whose net revenue from completed orders placed in calendar year 2025 exceeds 50,000 EUR. Shipping fees are excluded."
+ },
+ "cost_usd": 0.013008200000000001,
+ "duration_ms": 2314,
+ "wall_ms": 3982,
+ "attempts": 1,
+ "key": "2f5fc427857280fb"
+}

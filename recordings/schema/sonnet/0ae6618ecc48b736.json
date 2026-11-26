@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH yearly AS (\n  SELECT o.customer_id,\n         COALESCE(SUM(o.net_revenue) FILTER (WHERE o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01'), 0) AS rev_2024,\n         COALESCE(SUM(o.net_revenue) FILTER (WHERE o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'), 0) AS rev_2025\n  FROM marts.fct_orders AS o\n  WHERE o.is_revenue\n    AND o.order_date >= DATE '2024-01-01'\n    AND o.order_date < DATE '2026-01-01'\n  GROUP BY o.customer_id\n)\nSELECT COUNT(*) AS customer_count\nFROM yearly\nWHERE rev_2024 > 0\n  AND rev_2025 < 0.5 * rev_2024",
+  "explanation": "Counts customers with positive net revenue in calendar year 2024 whose 2025 net revenue was less than half of their 2024 amount. Only orders flagged as revenue (is_revenue) are included, and revenue means net_revenue. Customers with no revenue in 2025 are counted, since zero is less than half."
+ },
+ "cost_usd": 0.0107182,
+ "duration_ms": 4529,
+ "wall_ms": 6477,
+ "attempts": 1,
+ "key": "0ae6618ecc48b736"
+}

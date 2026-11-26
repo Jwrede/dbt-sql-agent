@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(customer_id) AS customer_count FROM marts.dim_customers",
+  "explanation": "dim_customers has one row per customer account, so counting customer_id gives the total number of customers."
+ },
+ "cost_usd": 0.0117283,
+ "duration_ms": 2245,
+ "wall_ms": 5060,
+ "attempts": 1,
+ "key": "63251642b2fb8d81"
+}

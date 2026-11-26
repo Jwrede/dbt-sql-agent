@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH completed AS (\n  SELECT o.customer_id,\n         o.order_date,\n         LAG(o.order_date) OVER (PARTITION BY o.customer_id ORDER BY o.order_date, o.order_id) AS prev_order_date\n  FROM marts.fct_orders o\n  JOIN marts.dim_customers c ON c.customer_id = o.customer_id\n  WHERE lower(c.segment) = 'enterprise'\n    AND lower(o.status) = 'completed'\n)\nSELECT ROUND(AVG(order_date - prev_order_date)::numeric, 2) AS avg_days_between_orders,\n       COUNT(*) AS order_gaps\nFROM completed\nWHERE prev_order_date IS NOT NULL;",
+  "explanation": "The query finds all completed orders from enterprise customers. For each customer it puts the orders in date order and uses LAG to get the date of the previous completed order. It then averages the number of days between each order and the one before it, rounded to 2 decimals. Each customer's first completed order has no earlier order, so it is left out. The query also returns how many gaps went into the average.\n\nAssumptions:\n- \"Completed\" means status = 'completed' as written in the question. It does not use the broader is_revenue flag.\n- The segment and status values are matched without regard to upper or lower case, because I couldn't see the exact values stored.\n- If a customer has two completed orders on the same day, that counts as a 0-day gap."
+ },
+ "cost_usd": 0.0213766,
+ "duration_ms": 10555,
+ "wall_ms": 12045,
+ "attempts": 1,
+ "key": "a9227182ead1cfcd"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(COALESCE(SUM(o.net_revenue), 0), 2) AS revenue_2025\nFROM marts.fct_orders AS o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "Revenue for 2025 is the sum of net_revenue for orders flagged is_revenue, with an order date in calendar year 2025. It is dated by order date, not payment date. Shipping fees are not added separately."
+ },
+ "cost_usd": 0.007854199999999999,
+ "duration_ms": 3041,
+ "wall_ms": 4723,
+ "attempts": 1,
+ "key": "a34e4c172b2b04bf"
+}

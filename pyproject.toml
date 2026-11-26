@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbt-sql-agent"
+version = "0.1.0"
+description = "LLM agent that answers business questions over a dbt warehouse on PostgreSQL, with column grants from dbt metadata, a SQL guard, cost limits, an audit log, an MCP server and an evaluation set"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = ["psycopg[binary]>=3.1", "sqlglot>=25", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+dbt = ["dbt-core>=1.9", "dbt-postgres>=1.9"]
+
+[project.scripts]
+dbt-sql-agent = "dbt_sql_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

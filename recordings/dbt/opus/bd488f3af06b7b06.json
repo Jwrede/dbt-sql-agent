@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS order_count FROM marts.fct_orders WHERE sales_rep_id = 3 AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "Counts every order assigned to sales_rep_id 3 with an order date in 2025, whatever its status (completed, cancelled, returned or open)."
+ },
+ "cost_usd": 0.0248166,
+ "duration_ms": 4817,
+ "wall_ms": 6509,
+ "attempts": 1,
+ "key": "bd488f3af06b7b06"
+}

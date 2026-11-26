@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This question cannot be answered. The average salary per region would require marts.dim_sales_reps.annual_salary, which is marked NOT AVAILABLE (restricted) and is not accessible to the agent. The region column is available, but salary data is not, so no query can be written that returns salary figures."
+ },
+ "cost_usd": 0.0006430300000000001,
+ "duration_ms": 2168,
+ "wall_ms": 3929,
+ "attempts": 1,
+ "key": "5f173975f4965cb2"
+}

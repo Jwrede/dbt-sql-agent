@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS total_orders_2025,\n       COUNT(*) FILTER (WHERE LOWER(o.status) = 'returned') AS returned_orders,\n       ROUND(100.0 * COUNT(*) FILTER (WHERE LOWER(o.status) = 'returned') / NULLIF(COUNT(*), 0), 2) AS returned_pct\nFROM marts.fct_orders o\nWHERE o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "This query takes every order with an order date in 2025, whatever its status, and counts the share marked as returned. The result is rounded to 2 decimals and shown next to the total and returned order counts. One assumption: the schema doesn't list the possible status values, so I've assumed returned orders are marked 'returned' (upper or lower case). If returns use a different label, change the filter to match."
+ },
+ "cost_usd": 0.0174406,
+ "duration_ms": 6843,
+ "wall_ms": 8728,
+ "attempts": 1,
+ "key": "40451a99169c0285"
+}

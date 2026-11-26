@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS open_orders FROM marts.fct_orders WHERE LOWER(status) = 'open'",
+  "explanation": "Counts orders in marts.fct_orders whose status is 'open', ignoring case. This is an assumption: the schema provided doesn't list the possible status values or define \"open\". If open orders are recorded under other values (such as pending or processing), the result will miss them and could show 0. Please check the status values and adjust the filter if needed."
+ },
+ "cost_usd": 0.0077122,
+ "duration_ms": 3277,
+ "wall_ms": 5262,
+ "attempts": 1,
+ "key": "b74f4d37d295d99c"
+}

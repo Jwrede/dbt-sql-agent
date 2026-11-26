@@ -1,0 +1,171 @@
+version: 2
+
+# Access metadata read by the agent (see dbt_sql_agent/policy.py):
+#   model meta agent_access: true      -> the model is visible to the agent
+#   column meta pii: true              -> personal data, never selectable by the agent
+#   column meta sensitivity: restricted -> confidential business data, never selectable by the agent
+# Business definitions live in the descriptions; the agent receives them as context.
+
+models:
+  - name: fct_orders
+    description: >
+      One row per sales order. Reporting date of the warehouse is 2025-12-31; the data covers
+      2024-01-01 to 2025-12-31. Revenue is always net revenue of completed orders: count an order
+      as revenue only when is_revenue is true (status = 'completed'). Cancelled, returned and open
+      orders are not revenue. Shipping fees are not part of revenue. Average order value (AOV) =
+      net revenue of completed orders divided by the number of completed orders. Fiscal year equals
+      the calendar year.
+    meta: {agent_access: true}
+    columns:
+      - name: order_id
+        description: Order number, primary key, assigned in order date sequence.
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: Customer who placed the order (dim_customers.customer_id).
+        data_tests:
+          - relationships: {arguments: {to: ref('dim_customers'), field: customer_id}}
+      - name: sales_rep_id
+        description: Sales representative responsible for the customer (dim_sales_reps.sales_rep_id).
+      - name: order_date
+        description: Date the order was placed.
+      - name: order_month
+        description: First day of the month of order_date.
+      - name: status
+        description: "One of completed, cancelled, returned, open."
+        data_tests:
+          - accepted_values: {arguments: {values: [completed, cancelled, returned, open]}}
+      - name: is_revenue
+        description: True when status = 'completed'. Only these orders count as revenue.
+      - name: gross_amount
+        description: Sum of quantity times unit price of all lines, before discounts, in EUR.
+      - name: discount_amount
+        description: Discount granted on the lines in EUR (gross_amount - net_revenue).
+      - name: net_revenue
+        description: Sum of line net amounts after discount, without shipping, in EUR. Use with is_revenue.
+      - name: shipping_fee
+        description: Shipping fee charged in EUR (9.90 below 250 EUR net, otherwise 0). Not revenue.
+      - name: cogs
+        description: Cost of goods sold of the order in EUR (quantity times product unit cost).
+      - name: gross_margin
+        description: net_revenue - cogs in EUR. Gross margin percent = sum(gross_margin) / sum(net_revenue).
+      - name: item_count
+        description: Total quantity of items on the order.
+
+  - name: fct_order_lines
+    description: >
+      One row per order line. Join to fct_orders on order_id for the status; product revenue counts
+      only lines of completed orders.
+    meta: {agent_access: true}
+    columns:
+      - name: order_id
+        description: Order (fct_orders.order_id).
+      - name: line_number
+        description: Line number within the order.
+      - name: product_id
+        description: Product (dim_products.product_id).
+      - name: quantity
+        description: Ordered quantity in units.
+      - name: unit_price
+        description: Unit list price at order time in EUR. List prices rose 4 percent on 2025-01-01.
+      - name: discount_pct
+        description: Line discount in percent (0, 5, 10 or 15).
+      - name: net_amount
+        description: quantity * unit_price * (1 - discount_pct / 100), in EUR.
+      - name: cogs
+        description: quantity * product unit cost, in EUR.
+
+  - name: dim_customers
+    description: >
+      One row per customer account (companies). Contact person fields are personal data and are
+      not available to the agent. lifetime_* columns count completed orders only.
+    meta: {agent_access: true}
+    columns:
+      - name: customer_id
+        description: Customer number, primary key.
+        data_tests: [unique, not_null]
+      - name: company_name
+        description: Legal name of the customer company.
+      - name: contact_name
+        description: Name of the contact person.
+        meta: {pii: true}
+      - name: contact_email
+        description: E-mail address of the contact person.
+        meta: {pii: true}
+      - name: contact_phone
+        description: Phone number of the contact person.
+        meta: {pii: true}
+      - name: country
+        description: "ISO 3166 alpha-2 country code: DE, AT, CH, NL, BE, FR, PL."
+      - name: segment
+        description: "Customer segment: enterprise, mid_market, small_business."
+      - name: created_at
+        description: Date the customer account was created.
+      - name: first_order_date
+        description: Date of the first completed order, null if none.
+      - name: last_order_date
+        description: Date of the last completed order, null if none.
+      - name: lifetime_orders
+        description: Number of completed orders.
+      - name: lifetime_net_revenue
+        description: Net revenue of completed orders in EUR.
+
+  - name: dim_products
+    description: One row per product (SKU).
+    meta: {agent_access: true}
+    columns:
+      - name: product_id
+        description: Product number, primary key.
+        data_tests: [unique, not_null]
+      - name: sku
+        description: Stock keeping unit code.
+      - name: product_name
+        description: Product name.
+      - name: category
+        description: "Product category: paper, furniture, electronics, cleaning, safety."
+      - name: list_price
+        description: Current (2024) base list price in EUR; 2025 orders were priced 4 percent higher.
+      - name: unit_cost
+        description: Purchase cost per unit in EUR.
+      - name: is_active
+        description: False for discontinued products.
+
+  - name: dim_sales_reps
+    description: >
+      One row per sales representative. Region assignment: DACH (DE, AT, CH), Benelux (NL, BE),
+      France (FR), Poland (PL). Names, e-mail addresses and salaries are not available to the agent.
+    meta: {agent_access: true}
+    columns:
+      - name: sales_rep_id
+        description: Employee number, primary key.
+        data_tests: [unique, not_null]
+      - name: full_name
+        description: Name of the employee.
+        meta: {pii: true}
+      - name: email
+        description: Work e-mail address.
+        meta: {pii: true}
+      - name: region
+        description: "Sales region: DACH, Benelux, France, Poland."
+      - name: hire_date
+        description: Date of hire.
+      - name: annual_salary
+        description: Gross annual salary in EUR.
+        meta: {sensitivity: restricted}
+
+  - name: fct_payments
+    description: >
+      One row per incoming payment. Completed and returned orders were paid; returned orders were
+      refunded outside this table. Days to pay = paid_at - order_date.
+    meta: {agent_access: true}
+    columns:
+      - name: payment_id
+        description: Payment number, primary key.
+        data_tests: [unique, not_null]
+      - name: order_id
+        description: Paid order (fct_orders.order_id).
+      - name: paid_at
+        description: Date the payment arrived.
+      - name: amount
+        description: Paid amount in EUR including shipping.
+      - name: method
+        description: "Payment method: invoice, sepa_debit, card."

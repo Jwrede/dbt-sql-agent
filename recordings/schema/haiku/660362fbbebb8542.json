@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS active_product_count FROM marts.dim_products WHERE is_active = TRUE;",
+  "explanation": "Counts rows in marts.dim_products where is_active is true. This assumes each row represents one product, so the count gives the number of currently active products."
+ },
+ "cost_usd": 0.00031612999999999997,
+ "duration_ms": 1876,
+ "wall_ms": 3727,
+ "attempts": 1,
+ "key": "660362fbbebb8542"
+}

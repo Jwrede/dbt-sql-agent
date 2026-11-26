@@ -1,0 +1,13 @@
+employee_id,full_name,email,region,hire_date,annual_salary
+1,Olga Albers,olga.albers@kestrel-supply.example,DACH,2021-01-24,51000
+2,Ines Unger,ines.unger@kestrel-supply.example,DACH,2020-09-18,62000
+3,Mara Hofmann,mara.hofmann@kestrel-supply.example,DACH,2022-02-15,74000
+4,Julien Haas,julien.haas@kestrel-supply.example,DACH,2018-07-23,66000
+5,Lukas Peeters,lukas.peeters@kestrel-supply.example,DACH,2015-09-05,83000
+6,Vera Bauer,vera.bauer@kestrel-supply.example,Benelux,2018-03-07,77000
+7,Lukas Quast,lukas.quast@kestrel-supply.example,Benelux,2017-05-09,68000
+8,Anna Olsen,anna.olsen@kestrel-supply.example,Benelux,2016-08-21,54000
+9,Julien Lambert,julien.lambert@kestrel-supply.example,France,2023-01-10,86000
+10,Stefan Lambert,stefan.lambert@kestrel-supply.example,France,2020-06-20,96000
+11,Yara Nowak,yara.nowak@kestrel-supply.example,Poland,2022-07-13,82000
+12,Anna Eilers,anna.eilers@kestrel-supply.example,Poland,2020-11-02,49000

@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "I can't report 2023 revenue because the warehouse has no data for that year. Orders start on 2024-01-01 and end on 2025-12-31, so a query for 2023 would just return nothing or zero, and that would wrongly suggest there were no sales. I can give you revenue for 2024 or 2025 instead: net revenue of completed orders (is_revenue = true), without shipping fees."
+ },
+ "cost_usd": 0.027088599999999997,
+ "duration_ms": 4714,
+ "wall_ms": 6435,
+ "attempts": 1,
+ "key": "615e9e8cd852b58b"
+}

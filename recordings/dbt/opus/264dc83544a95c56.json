@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM o.order_date)::int AS year, ROUND(SUM(o.net_revenue), 2) AS revenue FROM marts.fct_orders o WHERE o.is_revenue GROUP BY 1 ORDER BY 1",
+  "explanation": "Revenue is net revenue from completed orders only (is_revenue = true), so cancelled, returned and open orders are left out, and shipping fees aren't counted. The total is grouped by the calendar year of the order date, since the fiscal year is the same as the calendar year. The data covers 2024 and 2025."
+ },
+ "cost_usd": 0.0261046,
+ "duration_ms": 3759,
+ "wall_ms": 5380,
+ "attempts": 1,
+ "key": "264dc83544a95c56"
+}

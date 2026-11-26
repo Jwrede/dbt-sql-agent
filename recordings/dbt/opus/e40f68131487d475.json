@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n  SELECT order_month, SUM(net_revenue) AS revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n  GROUP BY order_month\n), growth AS (\n  SELECT order_month, revenue,\n         LAG(revenue) OVER (ORDER BY order_month) AS prev_revenue\n  FROM monthly\n)\nSELECT order_month AS month,\n       ROUND(revenue, 2) AS revenue,\n       ROUND(prev_revenue, 2) AS prev_month_revenue,\n       ROUND(100.0 * (revenue - prev_revenue) / NULLIF(prev_revenue, 0), 2) AS mom_growth_pct\nFROM growth\nWHERE order_month >= DATE '2025-01-01' AND order_month < DATE '2026-01-01'\nORDER BY order_month;",
+  "explanation": "This query works out the revenue growth from one month to the next for each month of 2025, listed in calendar order.\n\n1. **Monthly revenue:** Revenue is the net revenue of completed orders only (`is_revenue` true), without shipping fees. Cancelled, returned and open orders are left out. It is added up by `order_month`.\n2. **Comparison with the month before:** Each month is set against the previous month using `LAG`. I calculate this over the full data range (2024–2025) and filter to 2025 only at the end, so January 2025 is compared with December 2024 and gets a real growth figure.\n3. **Growth formula:** Growth % = (this month − last month) / last month × 100, rounded to 2 decimals. `NULLIF` stops a division by zero if a month had no revenue.\n\nBesides the growth percentage, the output shows each month's revenue and the previous month's revenue so you can check the numbers.\n\nList prices went up 4% on 2025-01-01, so part of January 2025's growth comes from the price increase, not from more sales."
+ },
+ "cost_usd": 0.0359206,
+ "duration_ms": 9873,
+ "wall_ms": 11214,
+ "attempts": 1,
+ "key": "e40f68131487d475"
+}

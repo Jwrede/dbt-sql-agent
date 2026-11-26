@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.method, ROUND(AVG(p.paid_at - o.order_date), 2) AS avg_days_to_pay\nFROM marts.fct_payments AS p\nJOIN marts.fct_orders AS o ON o.order_id = p.order_id\nGROUP BY p.method\nORDER BY p.method",
+  "explanation": "Days to pay is measured from the order date to the payment date (paid_at), averaged over individual payments for each method. An order paid in several instalments counts once per payment, and the average is not weighted by amount. All recorded payments are included, whatever the order status. Unpaid orders have no payment record, so they don't affect the result."
+ },
+ "cost_usd": 0.008628199999999999,
+ "duration_ms": 3612,
+ "wall_ms": 5416,
+ "attempts": 1,
+ "key": "61dd8c62566c9bc8"
+}

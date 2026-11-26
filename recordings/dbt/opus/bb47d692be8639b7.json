@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS active_products FROM marts.dim_products WHERE is_active = true;",
+  "explanation": "Counts products in dim_products where is_active is true. Discontinued products have is_active set to false."
+ },
+ "cost_usd": 0.0235446,
+ "duration_ms": 2840,
+ "wall_ms": 4512,
+ "attempts": 1,
+ "key": "bb47d692be8639b7"
+}

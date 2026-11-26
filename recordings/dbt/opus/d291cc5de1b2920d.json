@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(100.0 * SUM(l.net_amount - l.cogs) / NULLIF(SUM(l.net_amount), 0), 2) AS gross_margin_pct\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.category\nORDER BY gross_margin_pct DESC;",
+  "explanation": "This query gives the gross margin in percent for each product category in 2025. Gross margin percent is the sum of (line net amount minus line cost of goods sold) divided by the sum of line net amounts, times 100, rounded to 2 decimals. Only lines from completed orders count (is_revenue is true). Cancelled, returned and open orders are left out. The year is based on order date, from 2025-01-01 to 2025-12-31. Shipping fees aren't included. Results are sorted from highest to lowest margin."
+ },
+ "cost_usd": 0.030104599999999995,
+ "duration_ms": 7190,
+ "wall_ms": 8758,
+ "attempts": 1,
+ "key": "d291cc5de1b2920d"
+}

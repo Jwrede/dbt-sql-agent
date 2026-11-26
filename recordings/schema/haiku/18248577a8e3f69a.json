@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS late_invoice_payments\nFROM marts.fct_payments p\nJOIN marts.fct_orders o\n  ON o.order_id = p.order_id\nWHERE o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\n  AND p.method = 'invoice'\n  AND (p.paid_at - o.order_date) > 30;",
+  "explanation": "Joins payments to their orders, keeps orders placed in 2025 and payments with method 'invoice', and counts those where paid_at is more than 30 days after order_date. I assumed the method value is stored as lowercase 'invoice'; if the data uses a different casing or label, the filter would need adjusting. No revenue filter was applied because the question does not ask for one."
+ },
+ "cost_usd": 0.0005682300000000001,
+ "duration_ms": 3943,
+ "wall_ms": 6677,
+ "attempts": 1,
+ "key": "18248577a8e3f69a"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY o.net_revenue))::numeric, 2) AS median_net_order_value FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This returns the median net revenue per order, in EUR, for completed orders (is_revenue is true) placed in 2025. Shipping fees are excluded. PERCENTILE_CONT interpolates between the two middle values when the number of orders is even."
+ },
+ "cost_usd": 0.013254199999999999,
+ "duration_ms": 2696,
+ "wall_ms": 4480,
+ "attempts": 1,
+ "key": "a92be957be8ddfe7"
+}

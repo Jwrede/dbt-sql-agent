@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(p.payment_id) AS late_invoice_payments\nFROM marts.fct_payments p\nJOIN marts.fct_orders o ON o.order_id = p.order_id\nWHERE o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\n  AND LOWER(p.method) = 'invoice'\n  AND p.paid_at > o.order_date + 30;",
+  "explanation": "The query counts invoice payments that arrived more than 30 days after the order date, for orders placed in 2025. It links each payment to its order and keeps orders dated from 1 January 2025 to 31 December 2025. It then keeps payments whose method is 'invoice' (in any capitalisation) and whose payment date is more than 30 days after the order date.\n\nTwo assumptions to check:\n- **Method value:** I assumed invoice payments are stored as 'invoice'. I haven't checked the actual values in the method column, so if they're stored differently (for example 'bank_invoice'), the count will be wrong.\n- **All orders included:** The question asks about payments, not revenue, so the query counts orders of every status. It doesn't apply the is_revenue filter.\n\nThe query counts payments, not orders, so an order paid in several late invoice instalments is counted once per payment."
+ },
+ "cost_usd": 0.0203366,
+ "duration_ms": 9713,
+ "wall_ms": 11188,
+ "attempts": 1,
+ "key": "3a8ec82b997fee8e"
+}

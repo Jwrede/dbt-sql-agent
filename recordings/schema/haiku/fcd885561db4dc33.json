@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT r.region, ROUND(SUM(o.net_revenue), 2) AS revenue_2025\nFROM marts.fct_orders o\nJOIN marts.dim_sales_reps r ON r.sales_rep_id = o.sales_rep_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY r.region\nORDER BY revenue_2025 DESC\nLIMIT 1;",
+  "explanation": "Revenue is defined by fct_orders.is_revenue = true, measured as net_revenue. Orders are filtered to order_date in calendar 2025 and joined to dim_sales_reps via sales_rep_id to get the region. The query groups by region, sums net revenue, and returns the top region. Orders with no matching sales rep are excluded by the inner join. I have not executed the query, so the result is not yet verified."
+ },
+ "cost_usd": 0.00061443,
+ "duration_ms": 4436,
+ "wall_ms": 6703,
+ "attempts": 1,
+ "key": "fcd885561db4dc33"
+}

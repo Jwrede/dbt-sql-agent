@@ -1,0 +1,18 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE status = 'returned') / NULLIF(COUNT(*), 0), 2) AS returned_order_pct FROM marts.fct_orders WHERE order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01';",
+  "explanation": "The denominator is all orders placed in 2025 regardless of status, and the numerator is those with status = 'returned'. Both are taken from marts.fct_orders, filtering on order_date for calendar year 2025 (fiscal year equals calendar year). The result is rounded to 2 decimals. The query has not been run against the database.",
+  "explanation_placeholder": "unused"
+ },
+ "cost_usd": 0.0008011299999999999,
+ "duration_ms": 3390,
+ "wall_ms": 5671,
+ "attempts": 1,
+ "key": "d7dd297a5af75c13"
+}

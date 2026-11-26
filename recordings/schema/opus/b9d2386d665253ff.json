@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.segment, ROUND(SUM(o.net_revenue), 2) AS net_revenue\nFROM marts.fct_orders o\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY c.segment\nORDER BY net_revenue DESC;",
+  "explanation": "This query adds up net revenue for each customer segment for orders placed in 2025 (from January 1, 2025 up to but not including January 1, 2026). It joins the orders table to the customers table to get each customer's segment. Only orders flagged as revenue (is_revenue) are counted, which follows the warehouse's definition of which orders count as revenue. Totals are rounded to 2 decimals and listed from highest to lowest."
+ },
+ "cost_usd": 0.0165966,
+ "duration_ms": 4422,
+ "wall_ms": 6126,
+ "attempts": 1,
+ "key": "b9d2386d665253ff"
+}

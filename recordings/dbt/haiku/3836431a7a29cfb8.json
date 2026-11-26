@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The question cannot be answered with the available data. None of the listed tables (dim_customers, dim_products, dim_sales_reps, fct_order_lines, fct_orders, fct_payments) contain customer support ticket data, so there is no way to count tickets opened by enterprise customers in 2025. The closest available data is order activity, which is not the same thing as support tickets. If a support ticket table is added to the warehouse, this question could be answered by joining it to dim_customers on customer_id and filtering on segment = 'enterprise' and the 2025 open date."
+ },
+ "cost_usd": 0.0006785300000000001,
+ "duration_ms": 2261,
+ "wall_ms": 3822,
+ "attempts": 1,
+ "key": "3836431a7a29cfb8"
+}

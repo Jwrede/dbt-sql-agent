@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT customer_id, company_name, country, segment, created_at, first_order_date, last_order_date, lifetime_orders, ROUND(lifetime_net_revenue, 2) AS lifetime_net_revenue FROM marts.dim_customers WHERE customer_id = 8;",
+  "explanation": "This query returns all nine columns of marts.dim_customers for customer 8. I named each column instead of using SELECT *, which the rules don't allow. None of these columns is marked NOT AVAILABLE, so nothing had to be left out. Lifetime net revenue is rounded to 2 decimals."
+ },
+ "cost_usd": 0.015632600000000003,
+ "duration_ms": 5823,
+ "wall_ms": 7215,
+ "attempts": 1,
+ "key": "c57a45c90559690d"
+}

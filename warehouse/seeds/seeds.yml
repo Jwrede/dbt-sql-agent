@@ -1,0 +1,20 @@
+version: 2
+seeds:
+  - name: raw_customers
+    config:
+      column_types: {customer_id: integer, created_at: date}
+  - name: raw_employees
+    config:
+      column_types: {employee_id: integer, hire_date: date, annual_salary: integer}
+  - name: raw_products
+    config:
+      column_types: {product_id: integer, unit_price: "numeric(10,2)", unit_cost: "numeric(10,2)", is_active: boolean}
+  - name: raw_orders
+    config:
+      column_types: {order_id: integer, customer_id: integer, sales_rep_id: integer, order_date: date, shipping_fee: "numeric(10,2)"}
+  - name: raw_order_lines
+    config:
+      column_types: {order_id: integer, line_number: integer, product_id: integer, quantity: integer, unit_price: "numeric(10,2)", discount_pct: integer}
+  - name: raw_payments
+    config:
+      column_types: {payment_id: integer, order_id: integer, paid_at: date, amount: "numeric(12,2)"}

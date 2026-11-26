@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customers_over_50k_revenue_2025\nFROM (\n    SELECT o.customer_id\n    FROM marts.fct_orders o\n    WHERE o.is_revenue = true\n      AND o.order_date >= DATE '2025-01-01'\n      AND o.order_date < DATE '2026-01-01'\n    GROUP BY o.customer_id\n    HAVING SUM(o.net_revenue) > 50000\n) AS c;",
+  "explanation": "Revenue is net_revenue of completed orders (is_revenue = true). I filtered to orders dated in 2025, summed net_revenue per customer, and counted customers whose 2025 total exceeds 50,000 EUR. Fiscal year equals calendar year, so no adjustment is needed."
+ },
+ "cost_usd": 0.00083993,
+ "duration_ms": 3600,
+ "wall_ms": 5755,
+ "attempts": 1,
+ "key": "a9351cd6c577212b"
+}

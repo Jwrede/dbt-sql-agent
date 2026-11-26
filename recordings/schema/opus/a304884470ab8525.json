@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no web traffic or visitor data. The available tables only cover customers, products, sales reps, orders, order lines and payments. None of them record web shop sessions, page views or visitors, so I can't count visitors for 2025. Ordering customers (for example, distinct customers with orders in 2025) are not the same as visitors and shouldn't be used in their place. Visitor counts would need to come from a web analytics source that isn't in these marts."
+ },
+ "cost_usd": 0.0135566,
+ "duration_ms": 5326,
+ "wall_ms": 6890,
+ "attempts": 1,
+ "key": "a304884470ab8525"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE LOWER(p.method) = 'card') / NULLIF(COUNT(*), 0), 2) AS card_payment_pct FROM marts.fct_payments AS p",
+  "explanation": "This counts the payments whose method is card and divides by all payments in marts.fct_payments, as a percentage rounded to 2 decimals. It counts payment records, not amounts, and doesn't filter by order status because you asked about all payments. I assumed card payments are recorded with the method value 'card' (matched regardless of case)."
+ },
+ "cost_usd": 0.0078082,
+ "duration_ms": 3130,
+ "wall_ms": 4998,
+ "attempts": 1,
+ "key": "db80bcf191affeda"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n    SELECT o.order_month, SUM(o.net_revenue) AS revenue\n    FROM marts.fct_orders AS o\n    WHERE o.is_revenue\n      AND o.order_date >= DATE '2024-12-01'\n      AND o.order_date < DATE '2026-01-01'\n    GROUP BY o.order_month\n),\ngrowth AS (\n    SELECT m.order_month,\n           m.revenue,\n           LAG(m.revenue) OVER (ORDER BY m.order_month) AS prev_revenue\n    FROM monthly AS m\n)\nSELECT g.order_month,\n       ROUND(100.0 * (g.revenue - g.prev_revenue) / NULLIF(g.prev_revenue, 0), 2) AS mom_growth_pct\nFROM growth AS g\nWHERE g.order_month >= DATE '2025-01-01'\nORDER BY g.order_month",
+  "explanation": "Revenue is the sum of net_revenue for orders flagged is_revenue, grouped by order month. December 2024 is included so that January 2025 has a prior month to compare against, and only 2025 months are returned, in calendar order. The query assumes every month from December 2024 to December 2025 has revenue orders. If a month had none, it would be missing and the next month would be compared with the last month that had revenue."
+ },
+ "cost_usd": 0.0115902,
+ "duration_ms": 5077,
+ "wall_ms": 6796,
+ "attempts": 1,
+ "key": "aa4e924a1d811cde"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(SUM(CASE WHEN o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01' THEN l.net_amount ELSE 0 END), 2) AS revenue_2024,\n       ROUND(SUM(CASE WHEN o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' THEN l.net_amount ELSE 0 END), 2) AS revenue_2025,\n       ROUND(SUM(CASE WHEN o.order_date >= DATE '2025-01-01' THEN l.net_amount ELSE -l.net_amount END), 2) AS revenue_increase\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2024-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.category\nORDER BY revenue_increase DESC\nLIMIT 1",
+  "explanation": "This sums line-level net amounts by product category for revenue orders only (is_revenue), for calendar years 2024 and 2025 by order date. It returns the category with the largest absolute change (2025 minus 2024), along with both years' revenue. Amounts are assumed to be in EUR. If the result is negative, no category grew."
+ },
+ "cost_usd": 0.0119282,
+ "duration_ms": 5481,
+ "wall_ms": 7295,
+ "attempts": 1,
+ "key": "5a31f40f832ad581"
+}

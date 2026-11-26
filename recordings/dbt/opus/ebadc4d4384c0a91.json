@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(net_revenue), 2) AS revenue_2025 FROM marts.fct_orders WHERE is_revenue AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "Revenue is the net revenue of completed orders (is_revenue = true) placed in fiscal year 2025, which is the same as calendar 2025. Shipping fees are left out."
+ },
+ "cost_usd": 0.03108,
+ "duration_ms": 3502,
+ "wall_ms": 5187,
+ "attempts": 1,
+ "key": "ebadc4d4384c0a91"
+}

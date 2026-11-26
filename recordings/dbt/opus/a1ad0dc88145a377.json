@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH yearly AS (\n  SELECT\n    SUM(net_revenue) FILTER (WHERE order_date >= DATE '2024-01-01' AND order_date < DATE '2025-01-01') AS rev_2024,\n    SUM(net_revenue) FILTER (WHERE order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01') AS rev_2025\n  FROM marts.fct_orders\n  WHERE is_revenue\n)\nSELECT\n  ROUND(rev_2024, 2) AS revenue_2024,\n  ROUND(rev_2025, 2) AS revenue_2025,\n  ROUND((rev_2025 - rev_2024) / NULLIF(rev_2024, 0) * 100, 2) AS growth_pct\nFROM yearly;",
+  "explanation": "The query compares net revenue for fiscal 2024 and 2025. Fiscal years match calendar years. Only completed orders count (is_revenue = true), and shipping fees are left out. Growth is (2025 revenue − 2024 revenue) / 2024 revenue × 100, rounded to 2 decimals. It also returns both yearly totals for context. Keep in mind that list prices rose 4% on 2025-01-01, so part of the growth comes from higher prices rather than more sales."
+ },
+ "cost_usd": 0.0310686,
+ "duration_ms": 7280,
+ "wall_ms": 8735,
+ "attempts": 1,
+ "key": "a1ad0dc88145a377"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT region, COUNT(*) AS sales_rep_count FROM marts.dim_sales_reps GROUP BY region ORDER BY region;",
+  "explanation": "Counts sales representatives per region from marts.dim_sales_reps, using only the non-PII region and sales_rep_id columns. Each row in dim_sales_reps is one representative, so COUNT(*) gives the headcount per region."
+ },
+ "cost_usd": 0.0006287300000000001,
+ "duration_ms": 1999,
+ "wall_ms": 3636,
+ "attempts": 1,
+ "key": "7fd9a698cafcd6c3"
+}

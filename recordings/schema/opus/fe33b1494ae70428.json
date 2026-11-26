@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no support ticket data. None of the available tables (dim_customers, dim_products, dim_sales_reps, fct_order_lines, fct_orders, fct_payments) records support tickets. I can filter enterprise customers through dim_customers.segment, but I have nothing to count tickets from. If ticket data gets added to the marts, this question could be answered then."
+ },
+ "cost_usd": 0.0131166,
+ "duration_ms": 5775,
+ "wall_ms": 7234,
+ "attempts": 1,
+ "key": "fe33b1494ae70428"
+}

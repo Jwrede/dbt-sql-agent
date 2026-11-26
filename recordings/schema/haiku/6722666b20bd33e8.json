@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM order_date)::int AS revenue_year, ROUND(SUM(net_revenue), 2) AS revenue FROM marts.fct_orders WHERE is_revenue GROUP BY 1 ORDER BY 1;",
+  "explanation": "Revenue is summed from net_revenue in marts.fct_orders, restricted to orders flagged is_revenue = true, and grouped by the calendar year of order_date. The result is rounded to 2 decimals and sorted by year."
+ },
+ "cost_usd": 0.00048363,
+ "duration_ms": 3335,
+ "wall_ms": 4966,
+ "attempts": 1,
+ "key": "6722666b20bd33e8"
+}

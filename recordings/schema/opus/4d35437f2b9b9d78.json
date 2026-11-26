@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS discounted_orders\nFROM marts.fct_orders\nWHERE order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01'\n  AND discount_amount > 0;",
+  "explanation": "Counts orders with an order_date in 2025 and a discount_amount above 0. I didn't filter on status or is_revenue because the question asks for orders of any status."
+ },
+ "cost_usd": 0.0134086,
+ "duration_ms": 4950,
+ "wall_ms": 6378,
+ "attempts": 1,
+ "key": "4d35437f2b9b9d78"
+}

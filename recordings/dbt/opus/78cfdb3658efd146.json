@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH rev AS (\n  SELECT customer_id,\n         SUM(CASE WHEN EXTRACT(YEAR FROM order_date) = 2024 THEN net_revenue ELSE 0 END) AS rev_2024,\n         SUM(CASE WHEN EXTRACT(YEAR FROM order_date) = 2025 THEN net_revenue ELSE 0 END) AS rev_2025\n  FROM marts.fct_orders\n  WHERE is_revenue\n  GROUP BY customer_id\n)\nSELECT COUNT(*) AS customer_count\nFROM rev\nWHERE rev_2024 > 0\n  AND rev_2025 < 0.5 * rev_2024",
+  "explanation": "The query returns one number: how many customers had revenue in 2024 and less than half that amount in 2025.\n\n1. **What counts as revenue:** only net revenue of completed orders (`is_revenue` is true). Shipping fees are left out.\n2. **Totals per customer:** for each customer, the query adds up 2024 revenue and 2025 revenue separately, by order date.\n3. **Which customers are counted:** those with 2024 revenue above zero and 2025 revenue below half of their 2024 revenue.\n\nCustomers with revenue in 2024 but none in 2025 count as \"less than half\", so they are included. If you only want customers who still bought something in 2025, the query needs one extra condition (2025 revenue above zero)."
+ },
+ "cost_usd": 0.0327166,
+ "duration_ms": 6540,
+ "wall_ms": 8361,
+ "attempts": 1,
+ "key": "78cfdb3658efd146"
+}

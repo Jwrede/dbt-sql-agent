@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT r.region, ROUND(SUM(o.net_revenue), 2) AS net_revenue\nFROM marts.fct_orders o\nJOIN marts.dim_sales_reps r ON r.sales_rep_id = o.sales_rep_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY r.region\nORDER BY net_revenue DESC\nLIMIT 1;",
+  "explanation": "This query finds the sales region with the most revenue in 2025. It links each order to its sales rep's region and counts only orders flagged as revenue (is_revenue). It adds up net revenue for orders dated in calendar 2025, rounds to 2 decimals and returns the top region. If two regions tie for first place, it shows only one of them."
+ },
+ "cost_usd": 0.016304600000000002,
+ "duration_ms": 6910,
+ "wall_ms": 8365,
+ "attempts": 1,
+ "key": "5507494fadf0d811"
+}

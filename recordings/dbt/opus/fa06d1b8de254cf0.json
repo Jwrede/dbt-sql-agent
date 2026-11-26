@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(shipping_fee), 2) AS shipping_fees_2025\nFROM marts.fct_orders\nWHERE status = 'completed'\n  AND order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01';",
+  "explanation": "This query adds up the shipping fees on all completed orders placed in 2025. It uses the order date, and the fiscal year is the same as the calendar year. Shipping fees don't count as revenue, but the question asks only what was charged for shipping, so the total is reported on its own. It's rounded to 2 decimals in EUR."
+ },
+ "cost_usd": 0.0263566,
+ "duration_ms": 4107,
+ "wall_ms": 5981,
+ "attempts": 1,
+ "key": "fa06d1b8de254cf0"
+}

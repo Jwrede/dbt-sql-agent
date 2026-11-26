@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM created_at)::int AS creation_year, COUNT(*) AS accounts_created FROM marts.dim_customers GROUP BY 1 ORDER BY 1;",
+  "explanation": "Counts rows in marts.dim_customers grouped by the calendar year of created_at (the account creation date). Each row is one customer account, so COUNT(*) gives the number of accounts created that year. No order status filter applies because the question is about account creation, not revenue."
+ },
+ "cost_usd": 0.00067893,
+ "duration_ms": 2668,
+ "wall_ms": 4710,
+ "attempts": 1,
+ "key": "19356037d834762e"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT o.sales_rep_id, ROUND(SUM(o.net_revenue), 2) AS revenue FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY o.sales_rep_id ORDER BY revenue DESC, o.sales_rep_id LIMIT 3",
+  "explanation": "Revenue is the net revenue of completed orders (is_revenue) with an order date in 2025, excluding shipping fees. It is summed per sales representative's employee number, and the top three are returned. If there is a tie, the lower employee number comes first."
+ },
+ "cost_usd": 0.013480200000000001,
+ "duration_ms": 2584,
+ "wall_ms": 4016,
+ "attempts": 1,
+ "key": "c608ff120a88b3e1"
+}

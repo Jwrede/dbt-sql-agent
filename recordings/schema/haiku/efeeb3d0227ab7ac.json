@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no inventory or stock table. marts.dim_products covers product attributes (sku, name, category, list_price, unit_cost, is_active), and the fact tables cover orders, order lines, and payments, but none records on-hand or stock quantities. Order-line quantities are sales volumes, not stock levels, so they can't answer this. The current stock level of the ergonomic office chair would need to come from an inventory source that isn't part of this warehouse."
+ },
+ "cost_usd": 0.00037213000000000003,
+ "duration_ms": 2542,
+ "wall_ms": 5426,
+ "attempts": 1,
+ "key": "efeeb3d0227ab7ac"
+}

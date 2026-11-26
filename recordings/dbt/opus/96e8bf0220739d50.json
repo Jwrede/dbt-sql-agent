@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The question asks for contact e-mail addresses. marts.dim_customers.contact_email is marked NOT AVAILABLE (personal data), so it can't be returned. I can list the ten largest customers by 2025 net revenue (completed orders only) with their customer_id, company_name, country, segment and revenue, but not their e-mail addresses."
+ },
+ "cost_usd": 0.0246086,
+ "duration_ms": 4043,
+ "wall_ms": 5612,
+ "attempts": 1,
+ "key": "96e8bf0220739d50"
+}

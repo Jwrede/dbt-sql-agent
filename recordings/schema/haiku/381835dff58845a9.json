@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH yearly AS (\n  SELECT EXTRACT(YEAR FROM order_date)::int AS order_year,\n         SUM(net_revenue) AS revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2024-01-01'\n    AND order_date < DATE '2026-01-01'\n  GROUP BY 1\n)\nSELECT ROUND(\n         (MAX(CASE WHEN order_year = 2025 THEN revenue END)\n          - MAX(CASE WHEN order_year = 2024 THEN revenue END))\n         / NULLIF(MAX(CASE WHEN order_year = 2024 THEN revenue END), 0) * 100\n       , 2) AS revenue_growth_pct\nFROM yearly;",
+  "explanation": "Revenue is defined as orders with is_revenue = true, measured by net_revenue. The query sums net_revenue per calendar year (2024 and 2025) from marts.fct_orders, then computes the percentage growth from 2024 to 2025 as (2025 − 2024) / 2024 × 100, rounded to 2 decimals. NULLIF guards against a zero 2024 base."
+ },
+ "cost_usd": 0.0007027299999999999,
+ "duration_ms": 4720,
+ "wall_ms": 6591,
+ "attempts": 1,
+ "key": "381835dff58845a9"
+}

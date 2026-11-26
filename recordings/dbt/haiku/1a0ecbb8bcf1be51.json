@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT country, COUNT(*) AS customer_count FROM marts.dim_customers GROUP BY country ORDER BY customer_count DESC;",
+  "explanation": "Counts customer accounts per country from marts.dim_customers. Each row in dim_customers is one customer account, so COUNT(*) gives the number of customers per ISO country code. No personal data columns are used."
+ },
+ "cost_usd": 0.0006233300000000001,
+ "duration_ms": 2428,
+ "wall_ms": 4573,
+ "attempts": 1,
+ "key": "1a0ecbb8bcf1be51"
+}

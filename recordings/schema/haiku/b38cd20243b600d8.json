@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The question asks for customer support tickets, but none of the available tables (dim_customers, dim_products, dim_sales_reps, fct_order_lines, fct_orders, fct_payments) contain support ticket data, so this cannot be answered from the warehouse as listed. Enterprise customers could be identified via the segment column in marts.dim_customers, but there is no ticket source to count against."
+ },
+ "cost_usd": 0.00036173,
+ "duration_ms": 2212,
+ "wall_ms": 4561,
+ "attempts": 1,
+ "key": "b38cd20243b600d8"
+}

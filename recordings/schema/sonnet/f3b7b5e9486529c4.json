@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(COALESCE(SUM(o.discount_amount), 0), 2) AS total_discount FROM marts.fct_orders AS o WHERE o.status = 'completed' AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This sums the discount amount on orders with status 'completed' and an order date in 2025. I assumed the status value is stored as lowercase 'completed', since the status values aren't listed. I filtered on status rather than is_revenue because you asked specifically about completed orders."
+ },
+ "cost_usd": 0.0082022,
+ "duration_ms": 3034,
+ "wall_ms": 4505,
+ "attempts": 1,
+ "key": "f3b7b5e9486529c4"
+}

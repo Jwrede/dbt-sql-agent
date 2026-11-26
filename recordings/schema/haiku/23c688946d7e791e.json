@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH completed_orders AS (\n  SELECT o.customer_id, o.order_id, o.order_date\n  FROM marts.fct_orders o\n  JOIN marts.dim_customers c ON c.customer_id = o.customer_id\n  WHERE lower(c.segment) = 'enterprise'\n    AND lower(o.status) = 'completed'\n),\norder_gaps AS (\n  SELECT customer_id,\n         order_date - LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date, order_id) AS days_between\n  FROM completed_orders\n)\nSELECT ROUND(AVG(days_between)::numeric, 2) AS avg_days_between_orders\nFROM order_gaps\nWHERE days_between IS NOT NULL;",
+  "explanation": "The query takes completed orders (status = 'completed') for customers whose segment is 'enterprise', orders each customer's completed orders by date, computes the day difference between each order and the previous one for the same customer, and averages those gaps across all customers. The first order of each customer has no predecessor and is excluded. Assumptions: the segment label is 'enterprise' (matched case-insensitively) and 'completed' is the status value meaning completed. I did not have the column descriptions or the distinct values for these fields, so if the status uses a different label, or 'completed' should be interpreted through is_revenue instead, the filter needs adjusting."
+ },
+ "cost_usd": 0.00087223,
+ "duration_ms": 6766,
+ "wall_ms": 9639,
+ "attempts": 1,
+ "key": "23c688946d7e791e"
+}

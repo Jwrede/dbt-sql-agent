@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.method, ROUND(AVG(p.paid_at - o.order_date), 2) AS avg_days_to_pay FROM marts.fct_payments AS p JOIN marts.fct_orders AS o ON o.order_id = p.order_id GROUP BY p.method ORDER BY p.method",
+  "explanation": "Average days from order date to payment arrival (paid_at - order_date) for each payment method. It covers all recorded payments, including those for returned orders, which were paid and later refunded."
+ },
+ "cost_usd": 0.013234199999999998,
+ "duration_ms": 2669,
+ "wall_ms": 4267,
+ "attempts": 1,
+ "key": "c63a751437bf0b52"
+}

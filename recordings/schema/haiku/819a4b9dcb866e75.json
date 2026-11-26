@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue), 2) AS revenue_2023\nFROM marts.fct_orders o\nWHERE o.is_revenue = true\n  AND o.order_date >= DATE '2023-01-01'\n  AND o.order_date < DATE '2024-01-01';",
+  "explanation": "Revenue is defined by fct_orders where is_revenue is true, summing net_revenue. I filtered to order_date in calendar 2023 (January 1 to December 31) and rounded the total to 2 decimals. The query does not include payments or order lines."
+ },
+ "cost_usd": 0.00040773000000000003,
+ "duration_ms": 2914,
+ "wall_ms": 5112,
+ "attempts": 1,
+ "key": "819a4b9dcb866e75"
+}

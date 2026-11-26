@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY o.net_revenue)::numeric, 2) AS median_net_order_value\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "This query returns the median net revenue per order for completed orders placed in 2025, rounded to 2 decimals. It reads marts.fct_orders, keeps orders with status = 'completed' and an order date in calendar 2025, and takes the median of net_revenue using PERCENTILE_CONT(0.5). That function averages the two middle values if the count is even.\n\nI assumed the status value is spelled exactly 'completed', but I didn't have the column descriptions to confirm it. If \"completed\" is meant to cover every order that counts as revenue, change the filter to is_revenue = true."
+ },
+ "cost_usd": 0.0190846,
+ "duration_ms": 7647,
+ "wall_ms": 8937,
+ "attempts": 1,
+ "key": "1ebf4b8c7f32253b"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "I can't answer this. \"Earns the most\" refers to pay, and annual_salary is marked NOT AVAILABLE (restricted). Sales reps' names and e-mail addresses are also unavailable (personal data). If you meant which rep brings in the most revenue, I can rank reps by net revenue of completed orders, identified by sales_rep_id and region, for all data or for a year such as 2025."
+ },
+ "cost_usd": 0.013280199999999999,
+ "duration_ms": 2818,
+ "wall_ms": 4397,
+ "attempts": 1,
+ "key": "a9873c3f6f37ff2e"
+}

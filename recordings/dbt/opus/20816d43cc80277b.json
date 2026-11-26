@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "I can't answer this from the warehouse. None of the tables have marketing spend or acquisition cost data. They only cover customers, products, sales reps, orders, order lines and payments. I could count the customers acquired in 2025, either by account creation date (dim_customers.created_at) or by first completed order (first_order_date). But without spend figures, I can't work out the marketing cost per customer."
+ },
+ "cost_usd": 0.025028599999999998,
+ "duration_ms": 5170,
+ "wall_ms": 6545,
+ "attempts": 1,
+ "key": "20816d43cc80277b"
+}

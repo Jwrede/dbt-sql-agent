@@ -1,0 +1,2 @@
+# Versions the committed results were produced with (the SQL text in results/ comes from sqlglot)
+sqlglot==30.35.0

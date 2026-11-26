@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.segment, ROUND(SUM(o.net_revenue), 2) AS net_revenue FROM marts.fct_orders AS o JOIN marts.dim_customers AS c ON c.customer_id = o.customer_id WHERE o.is_revenue AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY c.segment ORDER BY net_revenue DESC",
+  "explanation": "Net revenue in EUR of completed orders placed in calendar year 2025, grouped by customer segment and sorted from highest to lowest. Shipping fees and cancelled, returned and open orders are excluded."
+ },
+ "cost_usd": 0.0133802,
+ "duration_ms": 2636,
+ "wall_ms": 4746,
+ "attempts": 1,
+ "key": "efc79e1a5a03b82d"
+}

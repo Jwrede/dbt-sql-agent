@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT ol.product_id) AS distinct_products\nFROM marts.fct_order_lines ol\nJOIN marts.fct_orders o ON o.order_id = ol.order_id\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE c.country = 'FR'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This query counts the distinct products on order lines placed in 2025 by customers in France (country code 'FR'). Orders of every status are included (completed, cancelled, returned and open), so there is no filter on is_revenue. France is defined by the customer's country, not by the sales rep's region."
+ },
+ "cost_usd": 0.0273406,
+ "duration_ms": 4279,
+ "wall_ms": 5996,
+ "attempts": 1,
+ "key": "92ab44610580572a"
+}

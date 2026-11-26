@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT ol.product_id) AS distinct_products_ordered\nFROM marts.fct_order_lines ol\nJOIN marts.fct_orders o ON o.order_id = ol.order_id\nJOIN marts.dim_customers c ON c.customer_id = o.customer_id\nWHERE c.country = 'France'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The query joins order lines to their orders (for customer and order date) and to customers, keeps customers with country 'France' and orders dated in 2025, and counts distinct product_id. No status filter is applied, so orders of any status are included, as the question requires. The country match is exact ('France'); if the warehouse stores variants such as 'france' or 'FR', those would need to be included as well."
+ },
+ "cost_usd": 0.00058453,
+ "duration_ms": 3868,
+ "wall_ms": 5410,
+ "attempts": 1,
+ "key": "4107fb514f7ddd9f"
+}

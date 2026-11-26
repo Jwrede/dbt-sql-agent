@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n  SELECT order_month, SUM(net_revenue) AS revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n  GROUP BY order_month\n),\nwith_prev AS (\n  SELECT order_month, revenue, LAG(revenue) OVER (ORDER BY order_month) AS prev_revenue\n  FROM monthly\n)\nSELECT\n  order_month,\n  ROUND(revenue, 2) AS revenue,\n  ROUND(100.0 * (revenue - prev_revenue) / NULLIF(prev_revenue, 0), 2) AS mom_growth_pct\nFROM with_prev\nWHERE order_month >= DATE '2025-01-01' AND order_month < DATE '2026-01-01'\nORDER BY order_month;",
+  "explanation": "Revenue is defined as orders with is_revenue = true, summed as net_revenue per order_month. The LAG window runs over all months so that January 2025 is compared against December 2024, and the result is then filtered to 2025 months in calendar order. Growth is (revenue - previous month revenue) / previous month revenue * 100, rounded to 2 decimals; NULLIF guards against division by zero. The first month overall has no previous value and would be NULL, but it falls outside 2025 anyway."
+ },
+ "cost_usd": 0.00072653,
+ "duration_ms": 5184,
+ "wall_ms": 7668,
+ "attempts": 1,
+ "key": "905f9d9eac92810e"
+}

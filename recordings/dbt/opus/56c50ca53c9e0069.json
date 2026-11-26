@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH units AS (\n  SELECT p.product_id, p.sku, p.product_name, p.category, SUM(l.quantity) AS units_sold\n  FROM marts.fct_order_lines l\n  JOIN marts.fct_orders o ON o.order_id = l.order_id\n  JOIN marts.dim_products p ON p.product_id = l.product_id\n  WHERE o.is_revenue = true\n    AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'\n  GROUP BY p.product_id, p.sku, p.product_name, p.category\n), ranked AS (\n  SELECT product_id, sku, product_name, category, units_sold,\n         RANK() OVER (ORDER BY units_sold DESC) AS rnk\n  FROM units\n)\nSELECT product_id, sku, product_name, category, units_sold\nFROM ranked\nWHERE rnk = 1\nORDER BY product_id;",
+  "explanation": "This query finds the product with the most units sold in 2025. It adds up the quantity on every order line from completed orders (is_revenue = true) placed between 2025-01-01 and 2025-12-31, and groups the totals by product. Cancelled, returned and open orders are left out. If several products tie for first place, all of them are returned."
+ },
+ "cost_usd": 0.031104599999999996,
+ "duration_ms": 7543,
+ "wall_ms": 9045,
+ "attempts": 1,
+ "key": "56c50ca53c9e0069"
+}

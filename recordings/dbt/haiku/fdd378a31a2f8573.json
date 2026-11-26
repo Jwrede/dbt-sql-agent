@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT o.sales_rep_id AS employee_number, ROUND(SUM(o.net_revenue), 2) AS revenue_2025 FROM marts.fct_orders o WHERE o.is_revenue AND o.sales_rep_id IS NOT NULL AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY o.sales_rep_id ORDER BY revenue_2025 DESC LIMIT 3;",
+  "explanation": "Revenue is net_revenue of completed orders (is_revenue = true) with order_date in calendar 2025 (fiscal year = calendar year), grouped by the sales rep on the order. Orders with no sales rep are excluded so they cannot appear among the top three. The query returns only the employee number and the revenue, which is what was asked. Names and salaries are not used. Ties at third place are not handled specially."
+ },
+ "cost_usd": 0.00094603,
+ "duration_ms": 4184,
+ "wall_ms": 5661,
+ "attempts": 1,
+ "key": "fdd378a31a2f8573"
+}

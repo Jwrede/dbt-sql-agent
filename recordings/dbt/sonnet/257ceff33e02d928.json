@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT region, COUNT(sales_rep_id) AS sales_rep_count FROM marts.dim_sales_reps GROUP BY region ORDER BY sales_rep_count DESC, region",
+  "explanation": "Counts the sales representatives in each region from marts.dim_sales_reps, largest first. It uses no personal or restricted columns."
+ },
+ "cost_usd": 0.0122342,
+ "duration_ms": 2066,
+ "wall_ms": 3965,
+ "attempts": 1,
+ "key": "257ceff33e02d928"
+}

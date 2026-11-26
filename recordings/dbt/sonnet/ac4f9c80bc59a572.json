@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS cancelled_orders_2025 FROM marts.fct_orders WHERE status = 'cancelled' AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "Counts orders in marts.fct_orders with status 'cancelled' and an order_date in calendar year 2025."
+ },
+ "cost_usd": 0.0123643,
+ "duration_ms": 2585,
+ "wall_ms": 5522,
+ "attempts": 1,
+ "key": "ac4f9c80bc59a572"
+}

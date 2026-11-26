@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH customer_revenue AS (\n    SELECT o.customer_id, SUM(o.net_revenue) AS revenue\n    FROM marts.fct_orders AS o\n    WHERE o.is_revenue\n      AND o.order_date >= DATE '2025-01-01'\n      AND o.order_date < DATE '2026-01-01'\n    GROUP BY o.customer_id\n),\nranked AS (\n    SELECT c.revenue,\n           ROW_NUMBER() OVER (ORDER BY c.revenue DESC, c.customer_id) AS rn\n    FROM customer_revenue AS c\n)\nSELECT ROUND(100.0 * SUM(r.revenue) FILTER (WHERE r.rn <= 10) / NULLIF(SUM(r.revenue), 0), 2) AS top10_revenue_pct\nFROM ranked AS r",
+  "explanation": "Revenue is taken as net_revenue on orders flagged is_revenue, with order_date in calendar year 2025, so shipping fees are not included. Customers are ranked by their 2025 revenue, not lifetime revenue. The result is the top ten's revenue as a percentage of all 2025 revenue. A tie at tenth place is broken by customer_id, which does not change the percentage."
+ },
+ "cost_usd": 0.0105342,
+ "duration_ms": 4519,
+ "wall_ms": 6359,
+ "attempts": 1,
+ "key": "8fe86a36744b7ac6"
+}

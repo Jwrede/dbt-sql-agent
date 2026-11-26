@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This can't be answered from the available tables because none of them records marketing spend or campaign costs. They cover customers, products, sales reps, orders, order lines and payments. Shipping fees, discounts and COGS are not marketing spend and shouldn't be used in its place.\n\nThe other half of the calculation, customers acquired in 2025, could be counted from marts.dim_customers, for example as customers whose first_order_date falls in 2025. If you have the 2025 marketing spend total from finance or another system, divide it by that count. I can write the query for the count if that helps."
+ },
+ "cost_usd": 0.0071542,
+ "duration_ms": 2516,
+ "wall_ms": 4234,
+ "attempts": 1,
+ "key": "ac14ebc133a3f908"
+}

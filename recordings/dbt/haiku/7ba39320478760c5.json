@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS cancelled_orders_2025\nFROM marts.fct_orders\nWHERE status = 'cancelled'\n  AND order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01';",
+  "explanation": "Counts orders with status 'cancelled' and order_date in calendar year 2025 (fiscal year equals calendar year). Uses status directly since cancelled orders are not flagged by is_revenue, and the date range is half-open to cover all of 2025."
+ },
+ "cost_usd": 0.00065123,
+ "duration_ms": 2368,
+ "wall_ms": 4419,
+ "attempts": 1,
+ "key": "7ba39320478760c5"
+}

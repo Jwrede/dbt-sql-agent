@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND(SUM(ol.net_amount), 2) AS net_revenue,\n       RANK() OVER (ORDER BY SUM(ol.net_amount) DESC) AS revenue_rank\nFROM marts.fct_order_lines ol\nJOIN marts.fct_orders o ON o.order_id = ol.order_id\nJOIN marts.dim_products p ON p.product_id = ol.product_id\nWHERE o.is_revenue\nGROUP BY p.category\nORDER BY net_revenue DESC;",
+  "explanation": "This query ranks product categories by net revenue over the whole period, highest first. Revenue is the sum of net_amount on the order lines, so line discounts are already taken off. Only orders marked as revenue (is_revenue = true) are counted. Each line is matched to its order to check that flag, and to its product to get the category. Shipping fees aren't included, because they are recorded per order and not per category."
+ },
+ "cost_usd": 0.0176966,
+ "duration_ms": 6838,
+ "wall_ms": 8601,
+ "attempts": 1,
+ "key": "c044247a02a5c94c"
+}

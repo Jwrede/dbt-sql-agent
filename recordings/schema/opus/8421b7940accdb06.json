@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT customer_id) AS customer_count FROM marts.dim_customers;",
+  "explanation": "Counts every distinct customer in marts.dim_customers, the customer dimension table. The count includes customers who haven't ordered yet. To count only customers who have ordered, add WHERE lifetime_orders > 0."
+ },
+ "cost_usd": 0.012752600000000001,
+ "duration_ms": 3931,
+ "wall_ms": 5588,
+ "attempts": 1,
+ "key": "8421b7940accdb06"
+}

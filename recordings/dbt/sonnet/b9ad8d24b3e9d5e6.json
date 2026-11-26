@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(c.customer_id) AS new_customers_2025 FROM marts.dim_customers AS c WHERE c.first_order_date >= DATE '2025-01-01' AND c.first_order_date < DATE '2026-01-01'",
+  "explanation": "Counts customers whose first completed order (dim_customers.first_order_date) falls in calendar year 2025. The data starts on 2024-01-01, so \"first\" means first within the data available."
+ },
+ "cost_usd": 0.0128502,
+ "duration_ms": 2384,
+ "wall_ms": 4198,
+ "attempts": 1,
+ "key": "b9ad8d24b3e9d5e6"
+}

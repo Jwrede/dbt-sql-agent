@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * SUM(o.gross_margin) / NULLIF(SUM(o.net_revenue), 0), 2) AS gross_margin_pct\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This query works out the 2025 gross margin percentage for completed orders: total gross margin divided by total net revenue, times 100, rounded to 2 decimals. It uses orders with an order date from 1 January to 31 December 2025.\n\nTwo assumptions to check:\n- **\"Completed\":** I took this to mean orders whose status is 'completed'. The schema I had doesn't list the allowed status values, so I couldn't confirm that exact spelling. There's also an is_revenue flag on each order. If your margin reporting normally counts all revenue orders, filter on is_revenue = true instead of status.\n- **Which revenue figure:** The percentage is based on net revenue (after discounts, without shipping fees), using the precomputed gross_margin column."
+ },
+ "cost_usd": 0.021676599999999997,
+ "duration_ms": 8659,
+ "wall_ms": 10108,
+ "attempts": 1,
+ "key": "2c89cb85a3858d94"
+}

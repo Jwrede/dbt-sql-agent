@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue) / NULLIF(COUNT(DISTINCT o.customer_id), 0), 2) AS avg_revenue_per_customer\nFROM marts.fct_orders AS o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This divides total 2025 net revenue by the number of distinct customers with at least one revenue-counting order dated in 2025. Only orders flagged is_revenue are included, so a customer whose 2025 orders were all non-revenue is not counted as having bought something. Shipping fees are not added, since the measure used is net_revenue."
+ },
+ "cost_usd": 0.0086362,
+ "duration_ms": 3260,
+ "wall_ms": 4784,
+ "attempts": 1,
+ "key": "f6733d3d59aede22"
+}

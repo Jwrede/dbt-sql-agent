@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH customer_revenue AS (\n    SELECT o.customer_id, SUM(o.net_revenue) AS revenue\n    FROM marts.fct_orders AS o\n    WHERE o.is_revenue\n      AND o.order_date >= DATE '2025-01-01'\n      AND o.order_date < DATE '2026-01-01'\n    GROUP BY o.customer_id\n),\nranked AS (\n    SELECT revenue,\n           ROW_NUMBER() OVER (ORDER BY revenue DESC, customer_id) AS rn\n    FROM customer_revenue\n)\nSELECT ROUND(100.0 * SUM(revenue) FILTER (WHERE rn <= 10) / NULLIF(SUM(revenue), 0), 2) AS top10_revenue_pct\nFROM ranked",
+  "explanation": "\"Largest customers\" is read as the ten customers with the highest 2025 net revenue from completed orders. The query divides their combined revenue by total 2025 revenue, excluding shipping fees. A tie at tenth place is broken by customer number, which does not change the percentage."
+ },
+ "cost_usd": 0.014830200000000002,
+ "duration_ms": 3365,
+ "wall_ms": 5217,
+ "attempts": 1,
+ "key": "60cac1722c73591f"
+}

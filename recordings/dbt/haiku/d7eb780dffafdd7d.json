@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT order_month, COUNT(*) AS completed_orders FROM marts.fct_orders WHERE is_revenue = true AND order_date >= DATE '2024-01-01' AND order_date < DATE '2025-01-01' GROUP BY order_month ORDER BY completed_orders DESC, order_month LIMIT 1",
+  "explanation": "Counts completed orders (is_revenue = true, equivalent to status = 'completed') for 2024 grouped by order_month, and returns the month with the highest count. Ties are broken by the earliest month. If several months tie, only the earliest is shown."
+ },
+ "cost_usd": 0.0007455300000000001,
+ "duration_ms": 3316,
+ "wall_ms": 5677,
+ "attempts": 1,
+ "key": "d7eb780dffafdd7d"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue) / COUNT(*), 2) AS average_order_value_eur FROM marts.fct_orders o WHERE o.is_revenue = true AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "AOV is net revenue of completed orders divided by the number of completed orders. Filtering fct_orders to is_revenue = true (status = 'completed') with order_date in calendar year 2025 (fiscal year equals calendar year). Result rounded to 2 decimals."
+ },
+ "cost_usd": 0.00070403,
+ "duration_ms": 2668,
+ "wall_ms": 4427,
+ "attempts": 1,
+ "key": "07c69e1b10a2984b"
+}

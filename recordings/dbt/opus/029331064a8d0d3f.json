@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY net_revenue))::numeric, 2) AS median_net_order_value FROM marts.fct_orders WHERE is_revenue = true AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "Calculates the median net_revenue (without shipping) across completed orders (is_revenue = true) placed in calendar/fiscal year 2025, rounded to 2 decimals."
+ },
+ "cost_usd": 0.025876600000000003,
+ "duration_ms": 4013,
+ "wall_ms": 5588,
+ "attempts": 1,
+ "key": "029331064a8d0d3f"
+}

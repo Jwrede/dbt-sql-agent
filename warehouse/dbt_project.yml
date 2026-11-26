@@ -1,0 +1,22 @@
+name: kestrel_warehouse
+version: "1.0.0"
+config-version: 2
+profile: kestrel_warehouse
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "logs"]
+
+seeds:
+  kestrel_warehouse:
+    +schema: raw
+models:
+  kestrel_warehouse:
+    staging:
+      +schema: staging
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

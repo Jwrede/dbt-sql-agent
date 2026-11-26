@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * SUM(l.net_amount) FILTER (WHERE l.discount_pct > 0) / NULLIF(SUM(l.net_amount), 0), 2) AS discounted_revenue_share_pct\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This is the net amount of discounted lines (discount_pct > 0) as a percentage of the net amount of all lines. It counts only completed orders placed in calendar year 2025. Shipping fees are excluded."
+ },
+ "cost_usd": 0.0141562,
+ "duration_ms": 3111,
+ "wall_ms": 4698,
+ "attempts": 1,
+ "key": "9bb253e6ab33aa2c"
+}

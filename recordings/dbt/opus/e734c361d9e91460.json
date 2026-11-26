@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no inventory or stock data. dim_products only has SKU, name, category, list price, unit cost and an active flag. None of the tables track stock on hand, warehouse quantities or goods received. fct_order_lines only shows quantities sold, so stock levels can't be worked out from it. I can show the product details for the ergonomic office chair, such as whether it's active, its price and its cost, or how many units have been sold."
+ },
+ "cost_usd": 0.0250646,
+ "duration_ms": 5989,
+ "wall_ms": 7211,
+ "attempts": 1,
+ "key": "e734c361d9e91460"
+}

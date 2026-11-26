@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse doesn't track inventory or stock levels. marts.dim_products only has the SKU, name, category, list price, unit cost and an is_active flag. None of the tables has stock on hand, inventory movements or warehouse quantities, so I can't work out the current stock level of the ergonomic office chair. I can show its product details, such as whether it's active, its price and cost, or its sales volumes from marts.fct_order_lines."
+ },
+ "cost_usd": 0.0134926,
+ "duration_ms": 6466,
+ "wall_ms": 7834,
+ "attempts": 1,
+ "key": "d0f5b864f0bb1e87"
+}

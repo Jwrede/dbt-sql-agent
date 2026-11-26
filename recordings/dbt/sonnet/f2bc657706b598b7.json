@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * (SUM(o.net_revenue) FILTER (WHERE o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01') - SUM(o.net_revenue) FILTER (WHERE o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01')) / NULLIF(SUM(o.net_revenue) FILTER (WHERE o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01'), 0), 2) AS revenue_growth_pct FROM marts.fct_orders AS o WHERE o.is_revenue AND o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Compares net revenue of completed orders (excluding shipping) in calendar year 2025 with 2024, and returns the percentage growth rounded to 2 decimals. The fiscal year equals the calendar year. Note that list prices rose 4 percent on 2025-01-01, so part of any growth reflects price rather than volume."
+ },
+ "cost_usd": 0.0150402,
+ "duration_ms": 3612,
+ "wall_ms": 5295,
+ "attempts": 1,
+ "key": "f2bc657706b598b7"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customers_without_completed_order FROM marts.dim_customers c WHERE NOT EXISTS (SELECT 1 FROM marts.fct_orders o WHERE o.customer_id = c.customer_id AND o.is_revenue)",
+  "explanation": "Counts customer accounts that have no order with is_revenue = true (status 'completed'). This includes customers who never ordered and those whose orders were all cancelled, returned or still open."
+ },
+ "cost_usd": 0.0252566,
+ "duration_ms": 5326,
+ "wall_ms": 6697,
+ "attempts": 1,
+ "key": "4dc54afc726e816c"
+}

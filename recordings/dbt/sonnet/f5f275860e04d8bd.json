@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This can't be answered from the warehouse because none of the available tables holds marketing spend, campaign or acquisition cost data. Without spend, marketing cost per acquired customer can't be calculated, and shipping fees, discounts or COGS are not valid substitutes.\n\nThe other half is available: I can count customers acquired in 2025, for example as those whose first completed order (dim_customers.first_order_date) falls in 2025, or whose account was created in 2025 (created_at). If you have the 2025 marketing spend total from finance or your marketing tools, divide it by that count."
+ },
+ "cost_usd": 0.0130202,
+ "duration_ms": 2958,
+ "wall_ms": 4825,
+ "attempts": 1,
+ "key": "f5f275860e04d8bd"
+}

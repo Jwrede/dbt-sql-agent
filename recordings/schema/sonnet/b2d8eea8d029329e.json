@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(COALESCE(SUM(l.net_amount), 0), 2) AS discontinued_net_revenue\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.is_revenue\n  AND p.is_active = FALSE",
+  "explanation": "This totals net line revenue across all dates for discontinued products, counting only orders flagged as revenue (is_revenue). I've assumed \"discontinued\" means is_active = false in the product table. Products are judged by their current status, so sales made before they were discontinued are included. Shipping fees are not included."
+ },
+ "cost_usd": 0.0084662,
+ "duration_ms": 3318,
+ "wall_ms": 4984,
+ "attempts": 1,
+ "key": "b2d8eea8d029329e"
+}

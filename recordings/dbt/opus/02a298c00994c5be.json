@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT order_month AS month, ROUND(SUM(net_revenue), 2) AS revenue FROM marts.fct_orders WHERE is_revenue AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01' GROUP BY order_month ORDER BY order_month",
+  "explanation": "Revenue is net revenue of completed orders only (is_revenue = true), without shipping fees. The query adds it up by order month for 2025 and sorts the months from January to December."
+ },
+ "cost_usd": 0.0255646,
+ "duration_ms": 3454,
+ "wall_ms": 5076,
+ "attempts": 1,
+ "key": "02a298c00994c5be"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.product_name, ROUND(SUM(l.net_amount - l.cogs), 2) AS gross_margin_eur FROM marts.fct_order_lines l JOIN marts.fct_orders o ON o.order_id = l.order_id JOIN marts.dim_products p ON p.product_id = l.product_id WHERE o.is_revenue = true AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY p.product_id, p.product_name ORDER BY gross_margin_eur DESC LIMIT 3;",
+  "explanation": "Gross margin is computed at line level as net_amount minus cogs, for completed orders only (is_revenue = true), with order_date in 2025. Lines are joined to fct_orders for status and date and to dim_products for the product name. The result is grouped by product, sorted by margin descending, and limited to the top three. Margin is rounded to 2 decimals. The query was not executed, so the figures are unverified."
+ },
+ "cost_usd": 0.00093863,
+ "duration_ms": 4182,
+ "wall_ms": 5972,
+ "attempts": 1,
+ "key": "d686e88c3e1a0d7c"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse holds only historical actuals (2024-01-01 to 2025-12-31) and has no forecast table, forecast model, or forecasting method. A Q1 2026 forecast would require me to choose an assumption (for example, Q1 2025 actuals times a growth rate, or a trailing run-rate), and the data dictionary does not define one. I can't produce a forecast from these tables without that choice. Options: (1) I can query Q1 2025 net revenue from completed orders as a baseline, or (2) if you specify a method, such as a growth rate applied to Q1 2025 or the average of recent quarters, I can compute it from completed-order net revenue. Note that 2025 list prices were 4 percent higher, which a forecast should account for."
+ },
+ "cost_usd": 0.0008983300000000001,
+ "duration_ms": 4700,
+ "wall_ms": 6371,
+ "attempts": 1,
+ "key": "7cb3115ae86d1265"
+}

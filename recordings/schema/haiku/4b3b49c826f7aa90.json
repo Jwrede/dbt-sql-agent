@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT region, COUNT(sales_rep_id) AS sales_rep_count FROM marts.dim_sales_reps GROUP BY region ORDER BY region;",
+  "explanation": "The question can be answered from marts.dim_sales_reps, which has one row per sales rep and a region column. The query groups by region and counts the reps in each group. No restricted columns are used."
+ },
+ "cost_usd": 0.00039743000000000005,
+ "duration_ms": 2397,
+ "wall_ms": 4212,
+ "attempts": 1,
+ "key": "4b3b49c826f7aa90"
+}

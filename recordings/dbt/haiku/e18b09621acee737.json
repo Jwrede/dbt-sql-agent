@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT method, COUNT(*) AS payment_count, ROUND(SUM(amount), 2) AS total_amount FROM marts.fct_payments WHERE paid_at >= DATE '2025-01-01' AND paid_at < DATE '2026-01-01' GROUP BY method ORDER BY method;",
+  "explanation": "Payments are taken from marts.fct_payments, filtered on paid_at within calendar 2025 (fiscal year equals calendar year). The table is already one row per payment, so no join is needed. Counts and amounts are grouped by method. The amount includes shipping, as the column defines it, and is rounded to 2 decimals."
+ },
+ "cost_usd": 0.00077103,
+ "duration_ms": 3056,
+ "wall_ms": 4970,
+ "attempts": 1,
+ "key": "e18b09621acee737"
+}

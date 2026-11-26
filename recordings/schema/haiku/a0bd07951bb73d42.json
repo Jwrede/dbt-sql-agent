@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT c.country, ROUND(SUM(o.net_revenue), 2) AS revenue FROM marts.fct_orders o JOIN marts.dim_customers c ON c.customer_id = o.customer_id WHERE o.is_revenue AND lower(trim(c.segment)) = 'enterprise' AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY c.country ORDER BY revenue DESC;",
+  "explanation": "Revenue is taken from fct_orders where is_revenue is true, summing net_revenue. Orders are joined to dim_customers to filter on segment 'enterprise' (case and whitespace normalized) and grouped by customer country. The date filter covers order_date in calendar 2025, and results are sorted highest revenue first. I did not run the query, so the segment spelling is assumed to be 'enterprise'."
+ },
+ "cost_usd": 0.00062493,
+ "duration_ms": 4088,
+ "wall_ms": 5934,
+ "attempts": 1,
+ "key": "a0bd07951bb73d42"
+}

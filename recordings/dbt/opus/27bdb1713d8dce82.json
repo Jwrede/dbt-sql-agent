@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM created_at)::int AS created_year, COUNT(*) AS customers_created FROM marts.dim_customers GROUP BY 1 ORDER BY 1",
+  "explanation": "Counts customer accounts in marts.dim_customers by the year of created_at. Every account counts, including ones that have never placed an order."
+ },
+ "cost_usd": 0.0245246,
+ "duration_ms": 5349,
+ "wall_ms": 7232,
+ "attempts": 1,
+ "key": "27bdb1713d8dce82"
+}

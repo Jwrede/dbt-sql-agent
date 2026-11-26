@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The question can't be answered with the listed tables. Marketing spend per customer acquired needs two inputs: marketing spend data and a count of customers acquired in 2025. The warehouse has no marketing cost or campaign table. marts.dim_customers has created_at and first_order_date, so acquisitions could be counted, but there is no source for the spend side. Please provide a marketing spend source (for example a table of marketing costs by period) and I can write the query."
+ },
+ "cost_usd": 0.00066003,
+ "duration_ms": 2466,
+ "wall_ms": 4269,
+ "attempts": 1,
+ "key": "8058460eb559ce7a"
+}

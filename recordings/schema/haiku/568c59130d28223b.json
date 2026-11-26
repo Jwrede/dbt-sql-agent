@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH rev_2025 AS (\n  SELECT customer_id, SUM(net_revenue) AS customer_revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_date >= DATE '2025-01-01'\n    AND order_date < DATE '2026-01-01'\n  GROUP BY customer_id\n),\ntop10 AS (\n  SELECT customer_revenue\n  FROM rev_2025\n  ORDER BY customer_revenue DESC\n  LIMIT 10\n)\nSELECT ROUND(\n  100.0 * (SELECT SUM(customer_revenue) FROM top10)\n  / NULLIF((SELECT SUM(customer_revenue) FROM rev_2025), 0),\n  2) AS top10_customer_revenue_share_pct;",
+  "explanation": "Revenue is defined as orders with is_revenue = true, filtered to order_date in calendar 2025, and summed by net_revenue. I did not use dim_customers.lifetime_net_revenue because it is lifetime, not 2025-specific. Customers are ranked by their 2025 revenue, the top 10 are taken, and their total is divided by total 2025 revenue. The result is rounded to 2 decimals. If several customers tie at the 10th position, LIMIT 10 picks one arbitrarily, so the percentage could shift slightly in that case."
+ },
+ "cost_usd": 0.00070923,
+ "duration_ms": 4528,
+ "wall_ms": 6164,
+ "attempts": 1,
+ "key": "568c59130d28223b"
+}

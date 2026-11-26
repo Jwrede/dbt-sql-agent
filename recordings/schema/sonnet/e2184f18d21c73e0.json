@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT customer_id, company_name, country, segment, created_at, first_order_date, last_order_date, lifetime_orders, ROUND(lifetime_net_revenue, 2) AS lifetime_net_revenue FROM marts.dim_customers WHERE customer_id = 8",
+  "explanation": "Returns all the dim_customers columns available to me for customer 8, named explicitly, with lifetime net revenue rounded to 2 decimals. None of them is marked NOT AVAILABLE. This covers only the listed columns of this table. If your GDPR record must include other data held about this customer, such as orders, payments or fields in source systems, it needs to be gathered separately."
+ },
+ "cost_usd": 0.0088622,
+ "duration_ms": 3993,
+ "wall_ms": 5897,
+ "attempts": 1,
+ "key": "e2184f18d21c73e0"
+}

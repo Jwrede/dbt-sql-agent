@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS open_order_count FROM marts.fct_orders WHERE status = 'open';",
+  "explanation": "Counts orders with status 'open' in marts.fct_orders. Open orders are not revenue, but the question asks for the count of open orders, so no is_revenue filter applies. The count is of orders (one row per order), not lines or revenue."
+ },
+ "cost_usd": 0.00062193,
+ "duration_ms": 2046,
+ "wall_ms": 4057,
+ "attempts": 1,
+ "key": "f63047cf60978b42"
+}

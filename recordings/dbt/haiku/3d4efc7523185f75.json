@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.product_id, p.product_name, SUM(l.quantity) AS units_sold FROM marts.fct_order_lines l JOIN marts.fct_orders o ON o.order_id = l.order_id JOIN marts.dim_products p ON p.product_id = l.product_id WHERE o.is_revenue = true AND o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01' GROUP BY p.product_id, p.product_name ORDER BY units_sold DESC LIMIT 1",
+  "explanation": "Joins order lines to orders (for is_revenue and order_date) and products. Filters to completed orders (is_revenue = true) placed in 2025, sums quantity per product, and returns the product with the highest total. If two products tie on units, only one is returned; the query does not show ties."
+ },
+ "cost_usd": 0.00087593,
+ "duration_ms": 3999,
+ "wall_ms": 5666,
+ "attempts": 1,
+ "key": "3d4efc7523185f75"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This can't be answered with the available tables. marts.dim_customers has customer_id, company_name, country, segment and order/date metrics, but no contact person column, so there are no contact names to search for \"Anna\" or to return as full names. The only name field is company_name, which doesn't identify individual contacts. Answering would need a contact-person field that isn't in the warehouse schema provided."
+ },
+ "cost_usd": 0.00041363,
+ "duration_ms": 2894,
+ "wall_ms": 4712,
+ "attempts": 1,
+ "key": "b16b64bb1cc0824d"
+}

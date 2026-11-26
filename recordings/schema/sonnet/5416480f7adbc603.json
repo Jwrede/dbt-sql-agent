@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY o.net_revenue))::numeric, 2) AS median_net_order_value\nFROM marts.fct_orders AS o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This takes the median of net_revenue, one value per order, for orders dated in calendar year 2025. I read \"completed orders\" as status = 'completed'. The table listing doesn't give the status values or column descriptions, so please confirm that this value is correct. If you meant all orders that count as revenue, filter on is_revenue instead. The median interpolates between the two middle orders when the count is even, and is rounded to 2 decimals."
+ },
+ "cost_usd": 0.0096282,
+ "duration_ms": 4342,
+ "wall_ms": 6152,
+ "attempts": 1,
+ "key": "5416480f7adbc603"
+}

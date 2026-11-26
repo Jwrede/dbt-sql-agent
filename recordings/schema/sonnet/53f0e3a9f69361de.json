@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT method, COUNT(payment_id) AS payment_count, ROUND(SUM(amount), 2) AS total_amount FROM marts.fct_payments WHERE paid_at >= DATE '2025-01-01' AND paid_at < DATE '2026-01-01' GROUP BY method ORDER BY method",
+  "explanation": "Counts and sums payments with a paid_at date in calendar year 2025, grouped by payment method. All payments received in that year are included, whatever the order date or status."
+ },
+ "cost_usd": 0.0069742,
+ "duration_ms": 2232,
+ "wall_ms": 3980,
+ "attempts": 1,
+ "key": "53f0e3a9f69361de"
+}

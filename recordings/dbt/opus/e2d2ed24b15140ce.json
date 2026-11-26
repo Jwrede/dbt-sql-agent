@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customer_count FROM marts.dim_customers",
+  "explanation": "Counts all customer accounts in dim_customers, which has one row per customer. This includes accounts that have never completed an order. To count only customers with at least one completed order, add WHERE lifetime_orders > 0."
+ },
+ "cost_usd": 0.030076000000000002,
+ "duration_ms": 3386,
+ "wall_ms": 4996,
+ "attempts": 1,
+ "key": "e2d2ed24b15140ce"
+}

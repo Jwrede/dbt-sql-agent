@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT order_month, COUNT(*) AS completed_order_count FROM marts.fct_orders WHERE status = 'completed' AND order_month >= DATE '2024-01-01' AND order_month < DATE '2025-01-01' GROUP BY order_month ORDER BY completed_order_count DESC, order_month LIMIT 1",
+  "explanation": "Counts orders with status 'completed' in marts.fct_orders, grouped by order_month for 2024, and returns the month with the highest count (ties broken by the earlier month). I assumed 'completed' is the literal status value; the schema does not list the status values, so this should be confirmed against the data. The query was not executed."
+ },
+ "cost_usd": 0.00052873,
+ "duration_ms": 3991,
+ "wall_ms": 5696,
+ "attempts": 1,
+ "key": "a99a0df3bf3ca4e3"
+}

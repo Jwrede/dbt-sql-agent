@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE o.status = 'returned') / NULLIF(COUNT(*), 0), 2) AS returned_pct FROM marts.fct_orders AS o WHERE o.order_date >= DATE '2025-01-01' AND o.order_date < DATE '2026-01-01'",
+  "explanation": "This divides the number of 2025 orders with status 'returned' by all orders placed in 2025, whatever their status. The year is based on order_date. I assumed the status value is spelled 'returned', as the table listing doesn't show the possible values."
+ },
+ "cost_usd": 0.0079062,
+ "duration_ms": 2989,
+ "wall_ms": 4640,
+ "attempts": 1,
+ "key": "7742bb90917bd90d"
+}

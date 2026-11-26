@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(net_revenue) / COUNT(DISTINCT customer_id), 2) AS avg_revenue_per_customer, COUNT(DISTINCT customer_id) AS customers FROM marts.fct_orders WHERE is_revenue AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'",
+  "explanation": "The query adds up the 2025 net revenue and divides it by the number of customers who bought something in 2025. Following the warehouse rules, only completed orders count (is_revenue = true), so a customer \"bought something\" if they had at least one completed order dated 2025-01-01 to 2025-12-31. Shipping fees are left out, and the average is rounded to 2 decimals. The result also shows how many customers the average is based on."
+ },
+ "cost_usd": 0.0276526,
+ "duration_ms": 6179,
+ "wall_ms": 7758,
+ "attempts": 1,
+ "key": "47c56543a7315bdd"
+}

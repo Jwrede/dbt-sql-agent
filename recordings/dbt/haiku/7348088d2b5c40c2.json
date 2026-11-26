@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH enterprise_completed AS (\n  SELECT o.customer_id, o.order_id, o.order_date\n  FROM marts.fct_orders o\n  JOIN marts.dim_customers c ON c.customer_id = o.customer_id\n  WHERE o.is_revenue = true\n    AND c.segment = 'enterprise'\n),\norder_gaps AS (\n  SELECT order_date - LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date, order_id) AS days_between\n  FROM enterprise_completed\n)\nSELECT ROUND(AVG(days_between), 2) AS avg_days_between_orders,\n       COUNT(*) AS order_pairs\nFROM order_gaps\nWHERE days_between IS NOT NULL;",
+  "explanation": "Filters to completed orders (is_revenue = true) of enterprise customers, then uses LAG per customer ordered by order_date (ties broken by order_id) to get the day gap between consecutive completed orders. The first order of each customer has no predecessor and is excluded. The average gap is rounded to 2 decimals, and the number of consecutive order pairs is returned alongside it."
+ },
+ "cost_usd": 0.0009825300000000001,
+ "duration_ms": 4428,
+ "wall_ms": 6149,
+ "attempts": 1,
+ "key": "7348088d2b5c40c2"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH monthly AS (\n  SELECT order_month, SUM(net_revenue) AS revenue\n  FROM marts.fct_orders\n  WHERE is_revenue\n    AND order_month >= DATE '2024-12-01'\n    AND order_month < DATE '2026-01-01'\n  GROUP BY order_month\n), growth AS (\n  SELECT order_month,\n         revenue,\n         LAG(revenue) OVER (ORDER BY order_month) AS prev_revenue\n  FROM monthly\n)\nSELECT order_month AS month,\n       ROUND(revenue, 2) AS net_revenue,\n       ROUND(prev_revenue, 2) AS prev_month_revenue,\n       ROUND(100.0 * (revenue - prev_revenue) / NULLIF(prev_revenue, 0), 2) AS mom_growth_pct\nFROM growth\nWHERE order_month >= DATE '2025-01-01'\nORDER BY order_month;",
+  "explanation": "The query returns one row per month of 2025, in calendar order, with the month's net revenue, the previous month's revenue and the month-over-month growth in percent.\n\n- **What counts as revenue:** only orders flagged as revenue orders are summed. The amount used is net revenue, which is after discounts and doesn't include shipping fees.\n- **How growth is calculated:** (this month − previous month) / previous month × 100, rounded to 2 decimals.\n- **January 2025:** December 2024 is included in the calculation so January has a month to compare against. It isn't shown in the output.\n- **Gaps:** if the previous month had zero revenue, the growth comes back empty instead of failing. If a month has no revenue orders at all, it won't appear, and the next month is compared with the last month that does."
+ },
+ "cost_usd": 0.0237886,
+ "duration_ms": 9759,
+ "wall_ms": 11116,
+ "attempts": 1,
+ "key": "0667d8798dd7d174"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.product_id, p.sku, p.product_name, SUM(l.quantity) AS units_sold\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.product_id, p.sku, p.product_name\nORDER BY SUM(l.quantity) DESC\nFETCH FIRST 1 ROWS WITH TIES",
+  "explanation": "This sums the quantity on order lines for each product, counting orders with status 'completed' and an order date in 2025. It returns the product with the most units, including any products tied for first. It assumes \"completed orders\" means the status value is exactly 'completed', rather than the broader is_revenue flag."
+ },
+ "cost_usd": 0.0096122,
+ "duration_ms": 4213,
+ "wall_ms": 5731,
+ "attempts": 1,
+ "key": "6fcb5c43eeec1bb0"
+}

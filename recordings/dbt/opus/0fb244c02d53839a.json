@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE p.method = 'card') / COUNT(*), 2) AS card_pct FROM marts.fct_payments p",
+  "explanation": "Counts the payments made by card in marts.fct_payments, divides by the total number of payments, multiplies by 100 and rounds to 2 decimals. All payment methods (invoice, sepa_debit, card) and all payments are included. That covers payments for returned orders too, since the question asks about all payments."
+ },
+ "cost_usd": 0.0256166,
+ "duration_ms": 6225,
+ "wall_ms": 7865,
+ "attempts": 1,
+ "key": "0fb244c02d53839a"
+}

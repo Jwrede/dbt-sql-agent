@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT l.product_id) AS distinct_products\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_customers AS c ON c.customer_id = o.customer_id\nWHERE c.country = 'FR'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'",
+  "explanation": "Counts the distinct products on order lines of orders placed in 2025 by customers whose country is France (FR). Orders of all statuses are included, as you asked."
+ },
+ "cost_usd": 0.0136462,
+ "duration_ms": 2728,
+ "wall_ms": 4283,
+ "attempts": 1,
+ "key": "600bf1480836dbdd"
+}

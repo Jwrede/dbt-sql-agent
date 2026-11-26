@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM c.created_at)::int AS created_year, COUNT(*) AS customer_count FROM marts.dim_customers AS c GROUP BY EXTRACT(YEAR FROM c.created_at)::int ORDER BY created_year",
+  "explanation": "Counts customer accounts (one row per account in dim_customers) by the calendar year of created_at, which is also the fiscal year. All accounts are included, whether or not they have any orders."
+ },
+ "cost_usd": 0.0126882,
+ "duration_ms": 2462,
+ "wall_ms": 4519,
+ "attempts": 1,
+ "key": "5e3266c4422f3b50"
+}

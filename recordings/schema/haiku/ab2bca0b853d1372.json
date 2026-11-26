@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category,\n       ROUND((SUM(l.net_amount) - SUM(l.cogs)) / NULLIF(SUM(l.net_amount), 0) * 100, 2) AS gross_margin_pct\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.category\nORDER BY p.category;",
+  "explanation": "Gross margin % per product category for 2025, limited to revenue orders (is_revenue = true) by order_date. Margin is computed as (sum of line net_amount minus sum of line cogs) divided by sum of line net_amount, times 100, rounded to 2 decimals. Lines are joined to orders for the revenue flag and date, and to products for category. Shipping fees are excluded because they are not in line-level net_amount or cogs."
+ },
+ "cost_usd": 0.00071063,
+ "duration_ms": 4793,
+ "wall_ms": 6607,
+ "attempts": 1,
+ "key": "ab2bca0b853d1372"
+}

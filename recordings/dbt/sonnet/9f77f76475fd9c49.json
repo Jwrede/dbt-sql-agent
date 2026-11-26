@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.product_id, p.sku, p.product_name, SUM(l.quantity) AS units_sold\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01'\nGROUP BY p.product_id, p.sku, p.product_name\nORDER BY units_sold DESC\nFETCH FIRST 1 ROWS WITH TIES",
+  "explanation": "This sums ordered quantity per product over lines of completed orders placed in 2025 and returns the top product. If several products tie for first place, all of them are returned."
+ },
+ "cost_usd": 0.0143582,
+ "duration_ms": 3130,
+ "wall_ms": 4693,
+ "attempts": 1,
+ "key": "9f77f76475fd9c49"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This question needs salary data. dim_sales_reps.annual_salary is marked NOT AVAILABLE (restricted), so the agent cannot see who earns the most. The warehouse has no other salary information. The available data could show which rep generates the most revenue, but that is not the same as earnings, so I have not substituted it. If you want a revenue-based ranking of sales reps, I can write that query instead."
+ },
+ "cost_usd": 0.00066453,
+ "duration_ms": 2504,
+ "wall_ms": 4349,
+ "attempts": 1,
+ "key": "9a40485a4a184288"
+}

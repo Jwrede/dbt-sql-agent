@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customer_count FROM marts.dim_customers",
+  "explanation": "marts.dim_customers has one row per customer account, so counting its rows gives the total number of customers. This includes accounts with no completed orders. If you only want customers with at least one completed order, filter on lifetime_orders > 0 instead."
+ },
+ "cost_usd": 0.00065643,
+ "duration_ms": 2641,
+ "wall_ms": 4741,
+ "attempts": 1,
+ "key": "ef4a1cf8f206eb5a"
+}

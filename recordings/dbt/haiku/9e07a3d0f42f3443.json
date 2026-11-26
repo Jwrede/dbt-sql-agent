@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS customers_lapsed_after_2024\nFROM (\n    SELECT o.customer_id\n    FROM marts.fct_orders o\n    WHERE o.is_revenue\n      AND o.order_date >= DATE '2024-01-01'\n      AND o.order_date < DATE '2025-01-01'\n    EXCEPT\n    SELECT o.customer_id\n    FROM marts.fct_orders o\n    WHERE o.is_revenue\n      AND o.order_date >= DATE '2025-01-01'\n      AND o.order_date < DATE '2026-01-01'\n) lapsed;",
+  "explanation": "Counts distinct customers with at least one completed order (is_revenue = true, which is status = 'completed') dated in 2024 and subtracts those with at least one completed order dated in 2025 using EXCEPT. The remaining customer IDs are counted. Fiscal year equals calendar year, so the date ranges are calendar years."
+ },
+ "cost_usd": 0.0008681300000000002,
+ "duration_ms": 3627,
+ "wall_ms": 5441,
+ "attempts": 1,
+ "key": "9e07a3d0f42f3443"
+}

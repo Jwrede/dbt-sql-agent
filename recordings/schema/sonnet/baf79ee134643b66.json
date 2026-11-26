@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.category, ROUND(SUM(l.net_amount), 2) AS net_revenue\nFROM marts.fct_order_lines AS l\nJOIN marts.fct_orders AS o ON o.order_id = l.order_id\nJOIN marts.dim_products AS p ON p.product_id = l.product_id\nWHERE o.is_revenue\nGROUP BY p.category\nORDER BY net_revenue DESC",
+  "explanation": "Ranks product categories by net revenue (the sum of order line net amounts) across all dates, highest first. Only orders flagged as revenue (is_revenue) are counted. Shipping fees are not included, since they aren't tied to a product category."
+ },
+ "cost_usd": 0.0081542,
+ "duration_ms": 3418,
+ "wall_ms": 5098,
+ "attempts": 1,
+ "key": "baf79ee134643b66"
+}

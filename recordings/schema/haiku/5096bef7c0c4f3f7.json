@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(AVG(o.item_count)::numeric, 2) AS avg_items_per_completed_order\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The query averages item_count from marts.fct_orders for orders with status 'completed' and order_date in 2025, rounded to 2 decimals. I assumed 'completed' is the literal status value; I could not verify the status values or column descriptions, so if the warehouse uses a different label (or if \"completed\" should mean is_revenue = true), the filter should be adjusted. Average is taken per order (each order counted once), not per order line."
+ },
+ "cost_usd": 0.0005812300000000001,
+ "duration_ms": 4764,
+ "wall_ms": 6515,
+ "attempts": 1,
+ "key": "5096bef7c0c4f3f7"
+}

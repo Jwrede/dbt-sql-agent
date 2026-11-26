@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT customer_id, first_order_date FROM marts.dim_customers WHERE customer_id = 42",
+  "explanation": "dim_customers.first_order_date is defined as the date of the customer's first completed order, so we just read it for customer 42. It is null if the customer has no completed orders."
+ },
+ "cost_usd": 0.0240326,
+ "duration_ms": 4251,
+ "wall_ms": 5803,
+ "attempts": 1,
+ "key": "7961cc5d685d87a2"
+}

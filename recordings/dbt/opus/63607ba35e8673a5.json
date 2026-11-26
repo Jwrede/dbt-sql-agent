@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH c24 AS (\n  SELECT DISTINCT customer_id FROM marts.fct_orders\n  WHERE is_revenue AND order_date >= DATE '2024-01-01' AND order_date < DATE '2025-01-01'\n), c25 AS (\n  SELECT DISTINCT customer_id FROM marts.fct_orders\n  WHERE is_revenue AND order_date >= DATE '2025-01-01' AND order_date < DATE '2026-01-01'\n)\nSELECT COUNT(*) AS customers_2024,\n       COUNT(c25.customer_id) AS retained_2025,\n       ROUND(100.0 * COUNT(c25.customer_id) / NULLIF(COUNT(*), 0), 2) AS retention_pct\nFROM c24 LEFT JOIN c25 ON c25.customer_id = c24.customer_id",
+  "explanation": "The query first finds every customer with at least one completed order in 2024 (is_revenue is true). It then checks which of them also had a completed order in 2025. Fiscal years match calendar years. The percentage is customers with completed orders in both years divided by customers with completed orders in 2024, rounded to 2 decimals. The query also returns the two counts behind the percentage."
+ },
+ "cost_usd": 0.030620599999999998,
+ "duration_ms": 7304,
+ "wall_ms": 8967,
+ "attempts": 1,
+ "key": "63607ba35e8673a5"
+}

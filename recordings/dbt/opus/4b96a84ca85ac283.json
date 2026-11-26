@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS open_orders FROM marts.fct_orders WHERE status = 'open';",
+  "explanation": "Counts the orders in marts.fct_orders whose status is 'open'. These are orders that have not been completed, cancelled or returned. The warehouse data runs to 2025-12-31, so this is the number of open orders on that reporting date, not today."
+ },
+ "cost_usd": 0.0245646,
+ "duration_ms": 4539,
+ "wall_ms": 6372,
+ "attempts": 1,
+ "key": "4b96a84ca85ac283"
+}

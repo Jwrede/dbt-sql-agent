@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT\n  p.category,\n  ROUND(SUM(l.net_amount), 2) AS revenue,\n  RANK() OVER (ORDER BY SUM(l.net_amount) DESC) AS revenue_rank\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o\n  ON o.order_id = l.order_id\nJOIN marts.dim_products p\n  ON p.product_id = l.product_id\nWHERE o.is_revenue\nGROUP BY p.category\nORDER BY revenue DESC;",
+  "explanation": "Revenue is taken as line-level net_amount for orders flagged is_revenue = true in fct_orders, grouped by product category from dim_products. Summed over all time (no date filter), ranked highest first. Shipping fees are excluded since they are not at line level."
+ },
+ "cost_usd": 0.00054273,
+ "duration_ms": 3414,
+ "wall_ms": 5741,
+ "attempts": 1,
+ "key": "3aaf86c12b7a8926"
+}

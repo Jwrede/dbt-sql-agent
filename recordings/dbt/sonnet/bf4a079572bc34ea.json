@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse has no web shop traffic data, such as visitors, sessions or page views, so the number of web shop visitors in 2025 can't be determined. The available tables cover customers, products, sales reps, orders, order lines and payments. Counting customers who placed orders in 2025 would measure buyers, not visitors, so it isn't a valid substitute. Visitor numbers would need to come from a web analytics source."
+ },
+ "cost_usd": 0.0125002,
+ "duration_ms": 2212,
+ "wall_ms": 3856,
+ "attempts": 1,
+ "key": "bf4a079572bc34ea"
+}

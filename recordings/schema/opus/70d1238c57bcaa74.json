@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS cancelled_orders\nFROM marts.fct_orders\nWHERE order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01'\n  AND LOWER(status) = 'cancelled';",
+  "explanation": "The query counts the orders in marts.fct_orders that were placed in 2025 (order_date from 2025-01-01 up to, but not including, 2026-01-01) and have the status 'cancelled'. It ignores capitalisation when checking the status. I couldn't check which status values actually appear in the data. If cancellations are stored under another spelling, such as 'canceled', the filter needs to change to match."
+ },
+ "cost_usd": 0.0158646,
+ "duration_ms": 5437,
+ "wall_ms": 7056,
+ "attempts": 1,
+ "key": "70d1238c57bcaa74"
+}

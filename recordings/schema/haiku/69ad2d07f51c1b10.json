@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(l.net_amount), 2) AS discontinued_net_revenue\nFROM marts.fct_order_lines l\nJOIN marts.fct_orders o ON o.order_id = l.order_id\nJOIN marts.dim_products p ON p.product_id = l.product_id\nWHERE o.is_revenue = true\n  AND p.is_active = false;",
+  "explanation": "Discontinued products are taken as products with is_active = false in dim_products. Revenue follows the warehouse definition: only orders flagged is_revenue = true count. Order lines from those orders are joined to their products, and net_amount is summed over the whole period with no date filter. The result is a single total rounded to 2 decimals. The query has not been run, so the figure is unverified."
+ },
+ "cost_usd": 0.00060433,
+ "duration_ms": 3972,
+ "wall_ms": 5529,
+ "attempts": 1,
+ "key": "69ad2d07f51c1b10"
+}

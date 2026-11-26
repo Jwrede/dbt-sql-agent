@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT p.method AS payment_method, COUNT(*) AS payment_count, ROUND(AVG(p.paid_at - o.order_date)::numeric, 2) AS avg_days_to_pay FROM marts.fct_payments p JOIN marts.fct_orders o ON o.order_id = p.order_id GROUP BY p.method ORDER BY p.method",
+  "explanation": "Days to pay is paid_at minus order_date, averaged per payment method. The fct_payments table only holds payments for orders that were paid (completed and returned), so no status filter is applied. Returned orders were paid, so they are included. Each payment is joined to its order to get order_date. The query also returns the payment count per method so the averages can be judged. Not run against the database, so the results are not verified."
+ },
+ "cost_usd": 0.0007902300000000001,
+ "duration_ms": 3514,
+ "wall_ms": 5461,
+ "attempts": 1,
+ "key": "6e99fd99cf3e1546"
+}

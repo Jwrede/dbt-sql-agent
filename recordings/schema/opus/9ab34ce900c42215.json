@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.discount_amount), 2) AS total_discount_2025\nFROM marts.fct_orders o\nWHERE o.status = 'completed'\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "This query adds up the discount amounts on orders with status 'completed' that were placed in 2025 (1 January to 31 December). It rounds the total to 2 decimals. I assumed the status value is spelled exactly 'completed', because the schema doesn't list the allowed values. If it's spelled differently, the query will return nothing. I also chose not to filter on is_revenue, since you asked about completed orders and not about all orders that count as revenue."
+ },
+ "cost_usd": 0.0174126,
+ "duration_ms": 5110,
+ "wall_ms": 6673,
+ "attempts": 1,
+ "key": "9ab34ce900c42215"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "This cannot be answered with the available tables. marts.dim_sales_reps contains only sales_rep_id, region, and hire_date. No salary column exists in it or in any other listed table, so average salary per region cannot be computed. Salary data would also likely fall under confidential HR data, which is not exposed in this warehouse. If you need this, the data would have to come from an HR or payroll source that is outside this warehouse."
+ },
+ "cost_usd": 0.00036723,
+ "duration_ms": 2397,
+ "wall_ms": 3979,
+ "attempts": 1,
+ "key": "d6890113ca476050"
+}

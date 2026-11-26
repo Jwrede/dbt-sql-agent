@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(*) AS orders_with_discount_2025\nFROM marts.fct_orders\nWHERE order_date >= DATE '2025-01-01'\n  AND order_date < DATE '2026-01-01'\n  AND discount_amount > 0;",
+  "explanation": "Counts all 2025 orders regardless of status whose order-level discount_amount (gross_amount minus net_revenue) is greater than zero, which means at least one line carried a discount. The filter on order_date limits the set to calendar 2025, and no is_revenue filter is applied because the question includes every status."
+ },
+ "cost_usd": 0.00081733,
+ "duration_ms": 3507,
+ "wall_ms": 5576,
+ "attempts": 1,
+ "key": "04785b7fdbc88c00"
+}

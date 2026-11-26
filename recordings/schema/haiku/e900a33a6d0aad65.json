@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT ROUND(SUM(o.net_revenue) / COUNT(DISTINCT o.customer_id), 2) AS avg_revenue_per_customer_2025\nFROM marts.fct_orders o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2025-01-01'\n  AND o.order_date < DATE '2026-01-01';",
+  "explanation": "The query uses fct_orders filtered to is_revenue = true (the warehouse's definition of revenue orders) with order_date in 2025. It sums net_revenue and divides by the number of distinct customers with at least one revenue order in 2025. That equals the average of per-customer 2025 revenue, restricted to customers who bought something in 2025. I interpreted \"bought something\" as having a revenue-counting order; if non-revenue orders (e.g., cancelled) should also count as purchases, the customer count would change."
+ },
+ "cost_usd": 0.0007003300000000001,
+ "duration_ms": 4827,
+ "wall_ms": 6468,
+ "attempts": 1,
+ "key": "e900a33a6d0aad65"
+}

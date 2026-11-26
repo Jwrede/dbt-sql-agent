@@ -1,0 +1,17 @@
+{
+ "model": "opus",
+ "effort": null,
+ "resolved_models": [
+  "claude-opus-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT COUNT(DISTINCT o.customer_id) AS churned_customers\nFROM marts.fct_orders o\nWHERE o.is_revenue\n  AND o.order_date >= DATE '2024-01-01' AND o.order_date < DATE '2025-01-01'\n  AND NOT EXISTS (\n    SELECT 1 FROM marts.fct_orders o2\n    WHERE o2.customer_id = o.customer_id\n      AND o2.is_revenue\n      AND o2.order_date >= DATE '2025-01-01' AND o2.order_date < DATE '2026-01-01'\n  )",
+  "explanation": "The query counts the separate customers who had at least one completed order in 2024 and no completed order in 2025. An order counts as completed when is_revenue is true. Cancelled, returned and open orders are left out, so a customer whose only 2025 orders were cancelled or still open is still counted. The result is one number, churned_customers."
+ },
+ "cost_usd": 0.028552599999999997,
+ "duration_ms": 7061,
+ "wall_ms": 8783,
+ "attempts": 1,
+ "key": "9b9b576d9c2520d4"
+}

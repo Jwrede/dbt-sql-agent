@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "WITH first_completed AS (\n  SELECT customer_id, MIN(order_date) AS first_completed_date\n  FROM marts.fct_orders\n  WHERE status = 'completed'\n  GROUP BY customer_id\n)\nSELECT COUNT(*) AS customers_first_completed_2025\nFROM first_completed\nWHERE first_completed_date >= DATE '2025-01-01'\n  AND first_completed_date < DATE '2026-01-01';",
+  "explanation": "The query finds each customer's earliest order with status 'completed' in marts.fct_orders, then counts customers whose earliest such order date falls in 2025. I used fct_orders rather than dim_customers.first_order_date because that field likely reflects any order, not only completed ones. The status value 'completed' is an assumption, since the column descriptions weren't provided; if the warehouse defines completed revenue orders via is_revenue = true instead, the filter should change to that."
+ },
+ "cost_usd": 0.00067673,
+ "duration_ms": 5012,
+ "wall_ms": 7561,
+ "attempts": 1,
+ "key": "863324bb19d2c746"
+}

@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": true,
+  "sql": "SELECT EXTRACT(YEAR FROM o.order_date)::int AS order_year, ROUND(SUM(o.net_revenue), 2) AS net_revenue FROM marts.fct_orders AS o WHERE o.is_revenue GROUP BY EXTRACT(YEAR FROM o.order_date) ORDER BY order_year",
+  "explanation": "Sums net revenue by calendar year of the order date, counting only orders flagged as revenue (is_revenue). Shipping fees are not added. The current year, 2026, is only partial if the data runs up to today."
+ },
+ "cost_usd": 0.0077022,
+ "duration_ms": 3036,
+ "wall_ms": 4740,
+ "attempts": 1,
+ "key": "00218788d8321542"
+}

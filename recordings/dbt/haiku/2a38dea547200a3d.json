@@ -1,0 +1,17 @@
+{
+ "model": "haiku",
+ "effort": null,
+ "resolved_models": [
+  "claude-haiku-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "The warehouse covers only 2024-01-01 to 2025-12-31 (per the fct_orders description), so there are no 2023 orders to sum and 2023 revenue cannot be determined from these tables. Reporting zero or null would be misleading. Revenue for 2024 or 2025 (completed orders only, via fct_orders.net_revenue where is_revenue is true, grouped by year of order_date) can be provided instead, or the 2023 figures would need to be loaded into the warehouse first."
+ },
+ "cost_usd": 0.00078503,
+ "duration_ms": 3549,
+ "wall_ms": 5135,
+ "attempts": 1,
+ "key": "2a38dea547200a3d"
+}

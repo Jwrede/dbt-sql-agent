@@ -1,0 +1,17 @@
+{
+ "model": "sonnet",
+ "effort": null,
+ "resolved_models": [
+  "claude-sonnet-5-5"
+ ],
+ "output": {
+  "answerable": false,
+  "sql": null,
+  "explanation": "I can't provide this. Contact e-mail addresses (marts.dim_customers.contact_email) are personal data and marked NOT AVAILABLE, so I haven't written a query for them. I can instead list the ten largest customers by 2025 net revenue (completed orders only) with customer number, company name, country, segment and revenue. For the e-mail addresses, ask whoever is authorised to access customer contact data."
+ },
+ "cost_usd": 0.012970200000000001,
+ "duration_ms": 2665,
+ "wall_ms": 4218,
+ "attempts": 1,
+ "key": "d2aab614de62e62e"
+}
